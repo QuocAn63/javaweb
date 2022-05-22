@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+	font-size: 62.5%;
+	font-family: 'Nunito', sans-serif;
+}
+
+.background-area {
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: 50%;
+}
+
+.button {
+	background-color: transparent;
+	border-radius: 20px;
+	padding: 8px 10px;
+	min-width: 50px;
+	color: var(--text-color);
+	text-transform: uppercase;
+	cursor: pointer;
+	text-align: center;
+}
+
+.show {
+	display: block !important;
+}
+
+.hide {
+	display: none !important;
+}
+
+a {
+	text-decoration: none;
+	color: var(--text-color);
+}
+
+.horizontal {
+	height: 1px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}  
+
