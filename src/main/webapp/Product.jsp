@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/dbf2cd060c.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./js/Cart.js" defer></script>
 </head>
 <body>
 	<%@include file="./Header.jsp" %>
@@ -32,7 +33,7 @@
 					<div class="row">
 						<div class="col c-5">
 							<div class="image_holder">
-								<div class="image" style="background-image: url(./img/product.webp)"></div>
+								<div class="image" style="background-image: url(${PRODUCT.PRODUCT_IMAGE})"></div>
 							</div>
 						</div>
 						<div class="col c-7">
@@ -56,7 +57,8 @@
 										Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
 									</div>
 									<div class="product_controller">
-										<button class="button">Thêm vào giỏ hàng</button>
+										<form class="add_to_cart_form"></form>
+										<button class="button add_to_cart_button" onClick="addToCart(${PRODUCT.PRODUCT_ID}, '${PRODUCT.PRODUCT_NAME}', '${PRODUCT.PRODUCT_IMAGE}', ${PRODUCT.PRODUCT_PRICE})">Thêm vào giỏ hàng</button>
 									</div>
 								</div>
 								
