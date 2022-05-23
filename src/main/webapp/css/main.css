@@ -301,6 +301,7 @@
 	text-transform: capitalize;
 	letter-spacing: 5px;
 	font-weight: bold;
+	white-space: nowrap;
 }
 
 .slick_slider_container .content .description {
