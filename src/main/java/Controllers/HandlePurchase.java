@@ -80,7 +80,7 @@ public class HandlePurchase extends HttpServlet implements AccountChecker {
 			
 			if(DAO.CreateInvoice(Invoice)) {
 				session.removeAttribute("cart");
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				request.getRequestDispatcher("Home").forward(request, response);
 			} else {
 				response.sendRedirect("Checkout");
 			}

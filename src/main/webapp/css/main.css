@@ -1,12 +1,5 @@
 @charset "UTF-8";
 
-:root {
-	--header-height: 60px;
-	--text-color: #202226;
-	--button-color: #78a206;
-	--red-color: #fc4f4f;
-}
-
 #header {
 	height: var(--header-height);
 	background: hsla(0,0%,100%,.9) none repeat scroll 0 0;

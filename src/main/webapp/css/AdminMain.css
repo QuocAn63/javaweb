@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+:root {
+	--sidebar-width: 30px;
+}
+
+#admin_content_container {
+	margin-top: calc(var(--header-height) + 60px);
+	margin-left: calc(var(--sidebar-width)*2 +  200px);
+	margin-right: var(--sidebar-width);
+	 
+}

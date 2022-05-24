@@ -74,6 +74,36 @@ public class ProductDAO extends HttpServlet {
 		return null;
 	}
 	
+	public ArrayList<Product> getAll() {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PRODUCT");
+			ResultSet result = stmt.executeQuery();
+			ArrayList<Product> list = new ArrayList<Product>();
+			
+			while(result.next()) {
+				Product product = new Product();
+				product.setPRODUCT_ID(result.getString("PRODUCT_ID"));
+				product.setPRODUCT_NAME(result.getString("PRODUCT_NAME"));
+				product.setPRODUCT_PRICE(result.getDouble("PRODUCT_PRICE"));
+				product.setCATEGORY(result.getString("CATEGORY"));
+				product.setSEASON(result.getString("SEASON"));
+				product.setCOUNTRY(result.getString("COUNTRY"));
+				product.setPRODUCT_IMAGE(result.getString("PRODUCT_IMAGE"));
+				product.setIS_DISABLED(result.getInt("IS_DISABLED"));
+				list.add(product);
+			}
+			
+			stmt.close();
+			conn.close();
+			
+			return list;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public ArrayList<Product> getAll(Filters Filters) {
 		
 		String subQuery = Filters.getLimitQuery();

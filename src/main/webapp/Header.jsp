@@ -5,24 +5,24 @@
 	<div class="navigation">
 		<div class="navigation_container">
 			<div class="navigation_item">
-				<a href="<%= request.getContextPath() %>" class="logo_container">
+				<a href="Home" class="logo_container">
 					<div class="main-logo background-area" style="background-image: url(./img/main-logo.webp)"></div>
 					<div class="logo-title">natureFruits</div>
 				</a>
 			</div>
 			<div class="navigation_item">
 				<div class="navigation_link_container">
-					<a href="<%= request.getContextPath() %>" class="navigation_link">
+					<a href="Home" class="navigation_link">
 						Trang chủ
 					</a>
 					<a href="<%= request.getContextPath() %>/ShopProducts" class="navigation_link">
 						Cửa hàng
 					</a>
 					<c:if test="${ sessionScope.account.USER_ROLE == 1 }">
-						<a href="<%= request.getContextPath() %>/ShopProducts" class="navigation_link">
+						<a href="Admin" class="navigation_link">
 							Quản lý sản phẩm
 						</a>
-						<a href="<%= request.getContextPath() %>/ShopProducts" class="navigation_link">
+						<a href="Admin" class="navigation_link">
 							Quản lý người dùng
 						</a>			
 					</c:if>

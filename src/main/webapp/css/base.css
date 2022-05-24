@@ -11,6 +11,14 @@ html {
 	font-family: 'Nunito', sans-serif;
 }
 
+:root {
+	--header-height: 60px;
+	--text-color: #202226;
+	--button-color: #78a206;
+	--red-color: #fc4f4f;
+}
+
+
 .background-area {
 	background-size: contain;
 	background-repeat: no-repeat;

@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+#admin_header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--header-height);
+	background: hsla(0,0%,100%,.9) none repeat scroll 0 0;
+    box-shadow: 0 0 5px #bdbdbd;
+}
+
+.admin_header_container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: var(--header-height);
+}
+
+.admin_header_container .admin_header_item .account_nav {
+	display: flex;
+	align-items: center;
+	gap: 25px;
+}
+
+.admin_header_container .admin_header_item .account_nav .account_name {
+	font-size: 1.6rem;
+	font-weight: bold;
+	color: var(--text-color);
+}
+
+.admin_header_container .admin_header_item .account_nav .account_icon_link {
+	font-size: 1.8rem;
+} 
+
+.admin_header_container .admin_header_item .account_nav .account_icon_link i:hover {
+	transition: all ease .3s;
+	color: var(--button-color);
+}

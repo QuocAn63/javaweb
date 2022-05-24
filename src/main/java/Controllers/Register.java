@@ -63,7 +63,7 @@ public class Register extends HttpServlet {
 			if(isAccountExist == null) {
 				boolean result = DAO.Save(new User(USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_FULL_NAME));
 				if(result) {
-					response.sendRedirect("index.jsp");
+					response.sendRedirect("Home");
 				} else {
 					request.setAttribute("MESSAGE", "Đăng ký không thành công");
 					request.getRequestDispatcher("Register.jsp").forward(request, response);

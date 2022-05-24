@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+#admin_shop .admin_shop_controller .button {
+	display: inline-block;
+	background-color: var(--button-color);
+	font-weight: bold;
+	font-size: 1.5rem;
+	color: #fff;
+	text-align: center;
+	border-radius: 4px;
+	transition: all ease .3s;
+}
+
+#admin_shop .admin_shop_controller .button:hover {
+	box-shadow: 0 8px 15px rgb(0 0 0 / 25%);
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+}
+
+#admin_shop .admin_shop_main {
+	margin-top: 40px;
+}
+
+#admin_shop_table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#admin_shop_table thead th {
+	background-color: var(--button-color);
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.6rem;
+	padding: 10px 0;
+	text-transform: capitalize;
+	border: 1px solid var(--button-color);
+}
+
+#admin_shop_table tbody td{
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	font-size: 1.4rem;
+	color: var(--text-color);
+	text-align: center;
+	padding: 10px;
+}
+
+#admin_shop_table .product_col {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
+#admin_shop_table .product_col .image_holder {
+	flex-basis: 20%;
+}
+
+#admin_shop_table .product_col .image {
+	padding-top: 100%;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: 100%;
+}
+
+#admin_shop_table .column_controllers {
+	display: inline-flex;
+	gap: 10px;
+}
+
+#admin_shop_table .column_controllers .button {
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	color: #fff;
+}
+
+#admin_shop_table .column_controllers .button.edit {
+	background-color: var(--button-color);
+}
+
+#admin_shop_table .column_controllers .button.delete {
+	background-color: var(--red-color);
+}

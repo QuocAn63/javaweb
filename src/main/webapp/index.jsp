@@ -46,21 +46,17 @@
 					<div class="products_list_container">
 						<div class="hero_title">Sản phẩm nổi bật</div>
 						<div class="row">
-						<%
-							for(int i=0; i<8; i++) {
-						%>
-							<div class="col c-3">
-								<div class="product">
-									<div class="image" style="background-image: url(./img/product.webp)"></div>
-									<div class="informations">
-										<div class="title">Juicy Grapes</div>
-										<div class="price">80</div>
+							<c:forEach items="${ Products }" var="product">
+								<div class="col c-3">
+									<div class="product">
+										<div class="image" style="background-image: url(./img/product.webp)"></div>
+										<div class="informations">
+											<div class="title">${ product.getPRODUCT_NAME() }</div>
+											<div class="price">${ product.getPRODUCT_PRICE() }</div>
+										</div>
 									</div>
-								</div>
-							</div>		
-						<%
-							}
-						%>
+								</div>									
+							</c:forEach>
 					</div>
 					</div>
 				</div>
