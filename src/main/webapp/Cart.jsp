@@ -16,6 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/dbf2cd060c.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./js/Cart.js" defer></script>
 </head>
 <body>
 	<%@include file="./Header.jsp" %>
@@ -42,30 +43,36 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>1</td>
-								<td>
-									<div class="product_col">
-										<div class="product_col_image" style="background-image: url(./img/product.webp)"></div>
-										<div class="product_col_name">XOÀI TƯƠI</div>
-									</div>	
-								</td>
-								<td>
-									40
-								</td>
-								<td>
-									2
-								</td>
-								<td>
-									80
-								</td>
-								<td style="width: 80px">
-									<button class="cart_delete_item_button">&times;</button>
-								</td>
-							</tr>
+							<c:forEach items="${ Cart.list }" var="item" varStatus="loop">
+								<tr>
+									<td>${loop.index + 1}</td>
+									<td>
+										<div class="product_col">
+											<div class="product_col_image" style="background-image: url(./img/product.webp)"></div>
+											<div class="product_col_name"><c:out value="${ item.PRODUCT.getPRODUCT_NAME() }"></c:out></div>
+										</div>	
+									</td>
+									<td>
+										<c:out value="${ item.PRODUCT.getPRODUCT_PRICE() }"></c:out>
+									</td>
+									<td>
+										<div class="product_quantitiy_controller">
+											<button class="quantity_button" onClick="handleChangeProductQuantity(<c:out value="${ item.PRODUCT.getPRODUCT_ID() }"></c:out>, Number.parseInt(document.querySelector('.cart_product_quantity_input').value) - 1)">&minus;</button>
+											<input type="number" class="cart_product_quantity_input" value="<c:out value="${ item.getQUANTITY() }"></c:out>" onChange="handleChangeProductQuantity(<c:out value="${ item.PRODUCT.getPRODUCT_ID() }"></c:out>, this.value)" >
+											<button class="quantity_button" onClick="handleChangeProductQuantity(<c:out value="${ item.PRODUCT.getPRODUCT_ID() }"></c:out>, Number.parseInt(document.querySelector('.cart_product_quantity_input').value) + 1)">&plus;</button>
+										</div>
+									</td>
+									<td>
+										<c:out value="${ item.PRODUCT.getPRODUCT_PRICE()*item.getQUANTITY() }"></c:out>
+									</td>
+									<td style="width: 80px">
+										<button class="cart_delete_item_button" onClick="removeFromCart(${ item.PRODUCT.getPRODUCT_ID() })">&times;</button>
+									</td>
+								</tr>
+							</c:forEach>
 							<tr>
 								<td colspan="5">Tổng cộng:</td>
-								<td>80</td>
+								<td><c:out value="${ Cart.getTotal() }"></c:out></td>
 							</tr>
 						</tbody>
 					</table>

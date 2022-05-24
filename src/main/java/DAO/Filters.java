@@ -85,7 +85,7 @@ public class Filters {
 	}
 
 	public boolean isEmpty() {
-		return (CATEGORY == null && MAX == null && SEASON == null && q == null && SORTBY == null);
+		return (CATEGORY == null && MAX == null && SEASON == null && q == null);
 	}
 	
 	public String getQuery() {
@@ -93,6 +93,10 @@ public class Filters {
 		ArrayList<String> list = new ArrayList<String>();
 		
 		if(this.isEmpty()) {
+			if(SORTBY != null) {
+				return " ORDER BY PRODUCT_PRICE " + this.SORTBY;
+			}
+			
 			return "";
 		}
 		
@@ -109,7 +113,7 @@ public class Filters {
 		}
 		
 		if(SEASON != null) {
-			list.add("SEASON = '" + this.SEASON + "'");
+			list.add("SEASON = '" + this.SEASON + "' || SEASON = 'all' ");
 		}
 		
 		query += String.join(" AND ", list);

@@ -45,19 +45,18 @@ public class UserDAO {
 	public boolean Update(User user) {
 		try {			
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement  stmt = conn.prepareStatement("UPDATE USER SET USER_FULL_NAME = ?, USER_PHONE_NUMBER = ?, USER_EMAIL = ?, USER_GENDER = ?, 	USER_DOB = ? WHERE USER_ID = ? ");
+			PreparedStatement  stmt = conn.prepareStatement("UPDATE USER SET USER_FULL_NAME = ?, USER_PHONE_NUMBER = ?, USER_ADDRESS = ?, USER_EMAIL = ?, USER_GENDER = ?, USER_DOB = ? WHERE USER_ID = ? ");
 			stmt.setString(1, user.getUSER_FULL_NAME());
 			stmt.setString(2, user.getUSER_PHONE_NUMBER());
-			stmt.setString(3, user.getUSER_EMAIL());
-			stmt.setInt(4, user.getUSER_GENDER());
-			stmt.setString(5, user.getUSER_DOB());
-			stmt.setString(6, user.getUSER_ID());
-			int result = stmt.executeUpdate();
-			conn.close();
-			stmt.close();
+			stmt.setString(3, user.getUSER_ADDRESS());
+			stmt.setString(4, user.getUSER_EMAIL());
+			stmt.setInt(5, user.getUSER_GENDER());
+			stmt.setString(6, user.getUSER_DOB());
+			stmt.setString(7, user.getUSER_ID());
 			
-			if(result == 1)
-				return true;
+			int result = stmt.executeUpdate();
+
+			return result != 0;
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,6 +82,7 @@ public class UserDAO {
 				user.setUSER_GENDER(result.getInt("USER_GENDER"));
 				user.setIS_DISABLED(result.getInt("IS_DISABLED"));
 				user.setUSER_ROLE(result.getInt("USER_ROLE"));
+				
 			}		
 			stmt.close();
 			conn.close();

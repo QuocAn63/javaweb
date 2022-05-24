@@ -56,10 +56,9 @@ public class Login extends HttpServlet {
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
 		} else {
 			HttpSession session = request.getSession();
-			session.setMaxInactiveInterval(600);
 			session.setAttribute("account", User);
+			
 			response.sendRedirect("index.jsp");
 		}
 	}
-
 }

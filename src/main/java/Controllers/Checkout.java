@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Interface.AccountChecker;
+
 /**
  * Servlet implementation class Checkout
  */
 @WebServlet("/Checkout")
-public class Checkout extends HttpServlet {
+public class Checkout extends HttpServlet implements AccountChecker {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -27,7 +29,15 @@ public class Checkout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/Checkout.jsp").forward(request, response);
+		if(AccountChecker.isLogin(request)) {
+			if(!AccountChecker.isCartEmpty(request)) {
+				request.getRequestDispatcher("Checkout.jsp").forward(request, response);
+			} else {
+				response.sendRedirect("ShopProducts");
+			}
+		} else {
+			response.sendRedirect("Login.jsp");
+		}
 	}
 
 	/**

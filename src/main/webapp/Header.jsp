@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-
-
 <div id="header">
 	<div class="navigation">
 		<div class="navigation_container">
@@ -26,6 +18,14 @@
 					<a href="<%= request.getContextPath() %>/ShopProducts" class="navigation_link">
 						Cửa hàng
 					</a>
+					<c:if test="${ sessionScope.account.USER_ROLE == 1 }">
+						<a href="<%= request.getContextPath() %>/ShopProducts" class="navigation_link">
+							Quản lý sản phẩm
+						</a>
+						<a href="<%= request.getContextPath() %>/ShopProducts" class="navigation_link">
+							Quản lý người dùng
+						</a>			
+					</c:if>
 				</div>
 			</div>
 			<div class="navigation_item">
@@ -51,9 +51,12 @@
 										Quản lý sản phẩm
 									</div>
 								</c:if>
-								<div class="user_controller_item">
+								<a href="GoToUser?site=profile" class="user_controller_item">
+									Thông tin tài khoản
+								</a>
+								<a href="GoToUser?site=invoices" class="user_controller_item">
 									Đơn hàng
-								</div>
+								</a>
 								<a href="<%= request.getContextPath() %>/Logout" class="user_controller_item">
 									Đăng xuất
 								</a>
@@ -69,54 +72,57 @@
 						</div>
 					</div>
 					<div class="cart dropdown_button">
-						<i class="fa-solid fa-cart-shopping dropdown_clickable"></i>
+						<i class="fa-solid fa-cart-shopping dropdown_clickable">
+							<c:if test="${ sessionScope.cart.list.size() > 0}">
+								<div class="product_count"><c:out value="${ sessionScope.cart.list.size() }"></c:out></div>
+							</c:if>
+						</i>
 						<div class="user_cart_popup dropdown">
+							<form class="cart_controllers_form"></form>
 							<div class="items_container">
-								<div class="cart_item">
-									<div class="image background-area" style="background-image: url(./img/banana.webp)"></div>
-									<div class="information">
-										<div class="name">Chuối</div>
-										<div class="quantity">x1</div>
-										<div class="price">40</div>	
+								<c:forEach items="${ sessionScope.cart.list }" var="item" >
+									<div class="cart_item">
+										<div class="image background-area" style="background-image: url(./img/banana.webp)"></div>
+										<div class="information">
+											<div class="name">${ item.PRODUCT.getPRODUCT_NAME() }</div>
+											<div class="quantity">x${ item.getQUANTITY() }</div>
+											<div class="price">${ item.PRODUCT.getPRODUCT_PRICE() }</div>	
+										</div>
+										<div class="controller">
+											<button type="button" onClick="removeFromCart(${ item.PRODUCT.getPRODUCT_ID() })">&times;</button>
+										</div>
 									</div>
-									<div class="controller">
-										<button type="button">&times;</button>
-									</div>
-								</div>
-								<div class="cart_item">
-									<div class="image background-area" style="background-image: url(./img/banana.webp)"></div>
-									<div class="information">
-										<div class="name">Chuối</div>
-										<div class="quantity">x1</div>
-										<div class="price">40</div>	
-									</div>
-									<div class="controller">
-										<button type="button">&times;</button>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
-							<div class="cart_info">
-								<div class="item">
-									<div class="title">Tổng giá:</div>
-									<div class="value">80</div>
+							<c:if test="${ sessionScope.cart != null }">
+								<div class="cart_info">
+									<div class="item">
+										<div class="title">Tổng giá:</div>
+										<div class="value"><c:out value="${ sessionScope.cart.getTotal() }"></c:out></div>
+									</div>
+									<div class="item">
+										<div class="title">Phí vận chuyển:</div>
+										<div class="value">Miễn phí</div>
+									</div>
+									<div class="item">
+										<div class="title">Thành tiền:</div>
+										<div class="value"><c:out value="${ sessionScope.cart.getTotal() }"></c:out></div>
+									</div>
 								</div>
-								<div class="item">
-									<div class="title">Phí vận chuyển:</div>
-									<div class="value">Miễn phí</div>
+								<div class="cart_controllers">
+									<a href="GoToCartPage" class="button" >
+										Xem giỏ hàng
+									</a>
+									<a href="<%= request.getContextPath() %>/Checkout" class="button">
+										Thanh toán
+									</a>
 								</div>
-								<div class="item">
-									<div class="title">Thành tiền:</div>
-									<div class="value">80</div>
+							</c:if>
+							<c:if test="${ sessionScope.cart == null }">
+								<div class="cart_empty" style="background-image: url(./img/empty-cart.png)">
+									<span>Giỏ hàng trống</span>
 								</div>
-							</div>
-							<div class="cart_controllers">
-								<a href="<%= request.getContextPath() %>/Cart" class="button" >
-									Xem giỏ hàng
-								</a>
-								<a href="<%= request.getContextPath() %>/Checkout" class="button">
-									Thanh toán
-								</a>
-							</div>
+							</c:if>
 						</div>
 					</div>
 				</div>

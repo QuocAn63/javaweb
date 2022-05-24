@@ -32,7 +32,7 @@ public class Logout extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		session.removeAttribute("account");
-		
+		session.removeAttribute("cart");
 		response.sendRedirect("index.jsp");
 	}
 

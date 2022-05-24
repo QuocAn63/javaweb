@@ -16,6 +16,14 @@ public class Product {
 		super();
 	}
 	
+	public Product(String pRODUCT_ID, String pRODUCT_NAME, Double pRODUCT_PRICE, String pRODUCT_IMAGE) {
+		super();
+		PRODUCT_ID = pRODUCT_ID;
+		PRODUCT_NAME = pRODUCT_NAME;
+		PRODUCT_PRICE = pRODUCT_PRICE;
+		PRODUCT_IMAGE = pRODUCT_IMAGE;
+	}
+
 	public Product(String pRODUCT_ID, String pRODUCT_NAME, Double pRODUCT_PRICE, String cATEGORY, String cATEGORY_NAME, String sEASON,
 			String cOUNTRY, String cOUNTRY_NAME, String pRODUCT_IMAGE, int iS_DISABLED) {
 		super();

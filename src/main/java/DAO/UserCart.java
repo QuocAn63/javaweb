@@ -22,24 +22,56 @@ public class UserCart {
 		Total = total;
 	}
 	
-	public void AddToCart(String PRODUCT_ID, String PRODUCT_NAME, String PRODUCT_IMAGE, double PRODUCT_PRICE, int QUANTITY) {
+	public void AddToCart(String PRODUCT_ID) {
 		CartItem item = new CartItem();
-		if(QUANTITY > 0) {
-			item.setPRODUCT_ID(PRODUCT_ID);
-			item.setPRODUCT_NAME(PRODUCT_NAME);
-			item.setPRODUCT_IMAGE(PRODUCT_IMAGE);
-			item.setPRODUCT_PRICE(PRODUCT_PRICE);
-			item.setQUANTITY(QUANTITY);
-			list.add(item);
+		ProductDAO DAO = new ProductDAO();
+		item.setPRODUCT(DAO.getProduct(PRODUCT_ID));
+		item.QUANTITY = 1;
+		list.add(item);
+		CalculateTotal();
+	}
+	
+	public boolean RemoveFromCart(String pRODUCT_ID) {
+		for(int i=0; i<list.size(); i++) {
+			if(list.get(i).PRODUCT.getPRODUCT_ID().equals(pRODUCT_ID)) {
+				list.remove(i);
+			}
 		}
+		CalculateTotal();
+		
+		return list.size() != 0;
+		
+	}
+	
+	public void EditProductQuantity(String PRODUCT_ID, int QUANTITY) {
+		for(CartItem item : list) {
+			if(item.PRODUCT.getPRODUCT_ID().equals(PRODUCT_ID)) {
+				item.setQUANTITY(QUANTITY);
+			}
+		}
+		CalculateTotal();
 	}
 	
 	public void CalculateTotal() {
 		double result = 0;
 		for(CartItem product : list) {
-			result += product.getPRODUCT_PRICE()*product.getQUANTITY();
+			result += product.getTotal();
 		}
 		
 		setTotal(result);
 	}
+
+	
+	
+	@Override
+	public String toString() {
+		for(CartItem item : list) {
+			item.toString();
+		}
+		return "UserCart [list=" + list + ", Total=" + Total + "]";
+	}
+
+	
+	
+	
 }

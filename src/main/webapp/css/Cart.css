@@ -93,3 +93,48 @@
 	color: #fff;
 	border: 2px solid var(--button-color);
 }
+
+
+#cart_table tbody .product_quantitiy_controller {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: nowrap;
+}
+
+#cart_table tbody .cart_product_quantity_input {
+	width: 60px;
+	padding: 6px 10px;
+	font-weight: bold;
+	text-align: center;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-left: 0;
+	border-right: 0;
+	outline: none;
+}
+
+#cart_table tbody .cart_product_quantity_input::-webkit-outer-spin-button,
+#cart_table tbody .cart_product_quantity_input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+  	margin: 0;
+}
+
+#cart_table tbody .quantity_button {
+	background-color: transparent;
+	padding: 6px 10px;
+	outline: none;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	cursor: pointer
+}
+
+#cart_table tbody .quantity_button:first-child {
+	 left: 0;
+	 top: 0;
+	 bottom: 0;
+}
+
+#cart_table tbody .quantity_button:last-child {
+	 right: 0;
+	 top: 0;
+	 bottom: 0;
+}

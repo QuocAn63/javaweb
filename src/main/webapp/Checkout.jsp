@@ -27,91 +27,80 @@
 	</div>
 	
 	<div id="checkout">
-		<div class="grid wide">
-			<div class="row">
-				<div class="col c-6">
-					<div id="invoice_user_detail">
-						<div class="hero_title">Thông tin cá nhân</div>
-						<div class="horizontal"></div>
-						<div class="detail_container">
-							<div class="input_area">
-								<div class="label">Họ và tên</div>
-								<div class="input_wrapper">
-									<input type="text" class="input_box" value="${ sessionScope.account.USER_FULL_NAME }">
+		<form action="HandlePurchase" method="POST">
+			<div class="grid wide">
+				<div class="row">
+					<div class="col c-6">
+						<div id="invoice_user_detail">
+							<div class="hero_title">Thông tin người nhận</div>
+							<div class="horizontal"></div>
+							<div class="detail_container">
+								<div class="input_area">
+									<div class="label">Họ và tên</div>
+									<div class="input_wrapper">
+										<input type="text" class="input_box" name="RECEIVER_FULL_NAME" value="${ sessionScope.account.USER_FULL_NAME }">
+									</div>
 								</div>
-							</div>
-							<div class="input_area">
-								<div class="label">Địa chỉ Email</div>
-								<div class="input_wrapper">
-									<input type="text" class="input_box" value="${ sessionScope.account.USER_EMAIL }">
+								<div class="input_area">
+									<div class="label">Số điện thoại</div>
+									<div class="input_wrapper">
+										<input type="text" class="input_box" name="RECEIVER_PHONE_NUMBER" value="${ sessionScope.account.USER_PHONE_NUMBER }">
+									</div>
 								</div>
-							</div>
-							<div class="input_area">
-								<div class="label">Số điện thoại</div>
-								<div class="input_wrapper">
-									<input type="text" class="input_box" value="${ sessionScope.account.USER_PHONE_NUMBER }">
-								</div>
-							</div>
-							<div class="input_area">
-								<div class="label">Địa chỉ</div>
-								<div class="input_wrapper">
-									<input type="text" class="input_box" value="${ sessionScope.account.USER_ADDRESS }">
+								<div class="input_area">
+									<div class="label">Địa chỉ</div>
+									<div class="input_wrapper">
+										<input type="text" class="input_box" name="RECEIVER_ADDRESS" value="${ sessionScope.account.USER_ADDRESS }">
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col c-6">
-					<div id="invoice_detail">
-						<div class="hero_title">Chi tiết hoá đơn</div>
-						<div class="horizontal"></div>
-						<div class="detail_container">
-							<div class="detail_item">
-								<div class="detail_title main_title">Sản phẩm</div>
-								<div class="detail_value main_title">Tổng tiền</div>
-							</div>
-							<div class="detail_item">
-								<div class="detail_title">
-									<div class="order_product">
-										<div class="name">Fresh Banana</div>
-										<div class="quantity">x 1</div>
-									</div>
+					<div class="col c-6">
+						<div id="invoice_detail">
+							<div class="hero_title">Chi tiết hoá đơn</div>
+							<div class="horizontal"></div>
+							<div class="detail_container">
+								<div class="detail_item">
+									<div class="detail_title main_title">Sản phẩm</div>
+									<div class="detail_value main_title">Tổng tiền</div>
 								</div>
-								<div class="detail_value">40</div>
-							</div>
-							<div class="detail_item">
-								<div class="detail_title">
-									<div class="order_product">
-										<div class="name">Fresh Banana</div>
-										<div class="quantity">x 1</div>
+								<c:forEach items="${ sessionScope.cart.list }" var="item">
+									<div class="detail_item">
+										<div class="detail_title">
+											<div class="order_product">
+												<div class="name">${ item.PRODUCT.getPRODUCT_NAME() }</div>
+												<div class="quantity">x ${ item.getQUANTITY() }</div>
+											</div>
+										</div>
+										<div class="detail_value">${ item.PRODUCT.getPRODUCT_PRICE()*item.getQUANTITY() }</div>
 									</div>
+								</c:forEach>
+							</div>
+							
+							<div class="horizontal"></div>
+							<div class="detail_container">
+								<div class="detail_item">
+									<div class="detail_title main_title">Tổng hoá đơn</div>
+									<div class="detail_value main_title"><c:out value="${ sessionScope.cart.getTotal() }"></c:out></div>
 								</div>
-								<div class="detail_value">40</div>
+								<div class="detail_item">
+									<div class="detail_title main_title">Phí vận chuyển</div>
+									<div class="detail_value main_title">Miễn phí</div>
+								</div>
+								<div class="detail_item">
+									<div class="detail_title main_title">Thành tiền</div>
+									<div class="detail_value main_title main_value"><c:out value="${ sessionScope.cart.getTotal() }"></c:out></div>
+								</div>
 							</div>
-						</div>
-						
-						<div class="horizontal"></div>
-						<div class="detail_container">
-							<div class="detail_item">
-								<div class="detail_title main_title">Tổng hoá đơn</div>
-								<div class="detail_value main_title">40</div>
+							<div class="order_controller">
+								<button class="button">Thanh toán</button>
 							</div>
-							<div class="detail_item">
-								<div class="detail_title main_title">Phí vận chuyển</div>
-								<div class="detail_value main_title">Miễn phí</div>
-							</div>
-							<div class="detail_item">
-								<div class="detail_title main_title">Thành tiền</div>
-								<div class="detail_value main_title main_value">40</div>
-							</div>
-						</div>
-						<div class="order_controller">
-							<button class="button">Thanh toán</button>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 	
 	<%@include file="./Footer.jsp" %>
