@@ -82,7 +82,7 @@
 							<div class="items_container">
 								<c:forEach items="${ sessionScope.cart.list }" var="item" >
 									<div class="cart_item">
-										<div class="image background-area" style="background-image: url(./img/banana.webp)"></div>
+										<div class="image background-area" style="background-image: url(${ item.PRODUCT.getPRODUCT_IMAGE()})"></div>
 										<div class="information">
 											<div class="name">${ item.PRODUCT.getPRODUCT_NAME() }</div>
 											<div class="quantity">x${ item.getQUANTITY() }</div>

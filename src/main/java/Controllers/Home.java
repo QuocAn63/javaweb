@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.Product;
 import DAO.ProductDAO;
 
 /**
@@ -33,7 +34,6 @@ public class Home extends HttpServlet {
 		// TODO Auto-generated method stub
 		ProductDAO DAO = new ProductDAO();
 		ArrayList<DAO.Product> list = DAO.getAll();
-		
 		request.setAttribute("Products", list);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

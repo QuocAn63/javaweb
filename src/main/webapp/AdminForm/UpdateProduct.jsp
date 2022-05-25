@@ -28,40 +28,40 @@
 			<div class="row">
 				<div class="col c-12">
 					<div id="admin_product_adding_form">
-						<div class="hero_title">Thêm sản phẩm</div>
-						<form action="AdminProduct?action=insert" method="POST" enctype='multipart/form-data'>
+						<div class="hero_title">Sửa sản phẩm</div>
+						<form action="AdminProduct?action=update&PRODUCT_ID=${ PRODUCT.getPRODUCT_ID() }" method="POST" enctype='multipart/form-data'>
 							<div class="row">
 								<div class="col c-6">
 									<div class="form_container">
 										<div class="text_area">
 											<div class="label">Tên sản phẩm</div>
 											<div class="input_wrapper">
-												<input class="input_box" type="text" name="PRODUCT_NAME">
+												<input class="input_box" type="text" name="PRODUCT_NAME" value="${ PRODUCT.getPRODUCT_NAME() }">
 											</div>
 										</div>
 										<div class="text_area">
 											<div class="label">Giá</div>
 											<div class="input_wrapper">
-												<input class="input_box" type="number" name="PRODUCT_PRICE">
+												<input class="input_box" type="number" name="PRODUCT_PRICE" value="${ PRODUCT.getPRODUCT_PRICE() }" >
 											</div>
 										</div>
 										<div class="text_area select_container">
 											<div class="select_text_area">
 												<div class="label">Mùa</div>
 												<div class="select-wrapper">
-													<select name="SEASON">
+													<select name="SEASON" value="${ PRODUCT.getSEASON() }"">
 														<option value="all">Tất cả</option>
-														<option value="spring">Xuân</option>
-														<option value="summer">Hạ</option>
-														<option value="attumn">Thu</option>
-														<option value="winter">Đông</option>
+														<option value="all">Xuân</option>
+														<option value="all">Hạ</option>
+														<option value="all">Thu</option>
+														<option value="all">Đông</option>
 													</select>
 												</div>
 											</div>
 											<div class="select_text_area">
 												<div class="label">Danh mục</div>
 												<div class="select-wrapper">
-													<select name="CATEGORY">
+													<select name="CATEGORY" value="${ PRODUCT.getCATEGORY() } }">
 														<c:forEach items="${ CATEGORIES }" var="CATEGORY">
 															<option value="${CATEGORY.getCATEGORY_ID()}">${ CATEGORY.getCATEGORY_NAME() }</option>
 														</c:forEach>
@@ -71,7 +71,7 @@
 											<div class="select_text_area">
 												<div class="label">Xuất xứ</div>
 												<div class="select-wrapper">
-													<select name="COUNTRY">
+													<select name="COUNTRY" value="${ PRODUCT.getCOUNTRY() } }">
 														<c:forEach items="${ COUNTRIES }" var="COUNTRY">
 															<option value="${ COUNTRY.getCOUNTRY_ID() }">${ COUNTRY.getCOUNTRY_NAME() }</option>
 														</c:forEach>
@@ -81,7 +81,7 @@
 										</div>
 										<div class="text_area">
 											<div class="label">Mô tả</div>
-											<textarea class="product_description" name="PRODUCT_DESCRIPTION"></textarea>
+											<textarea class="product_description" name="PRODUCT_DESCRIPTION"><c:out value='${ PRODUCT.getPRODUCT_DESCRIPTION() }' ></c:out></textarea>
 										</div>
 									</div>
 								</div>
@@ -89,7 +89,7 @@
 									<div class="image_preview_side">
 										<div class="label">Ảnh sản phẩm</div>
 										<div class="image_holder">
-											<div class="image"></div>
+											<div class="image" style="background-image: url(${ PRODUCT.getPRODUCT_IMAGE()})"></div>
 										</div>
 										<div class="image_controller">
 											<input type="file" multiple id="file_input" name="PRODUCT_IMAGE"> 
@@ -99,7 +99,7 @@
 								</div>
 								<div class="col c-12">
 									<div class="form_controller">
-										<button class="button">Thêm</button>
+										<button class="button">Sửa</button>
 									</div>
 								</div>
 							</div>

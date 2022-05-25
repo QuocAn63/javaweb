@@ -48,7 +48,7 @@
 									<td>${loop.index + 1}</td>
 									<td>
 										<div class="product_col">
-											<div class="product_col_image" style="background-image: url(./img/product.webp)"></div>
+											<div class="product_col_image" style="background-image: url(${ item.PRODUCT.getPRODUCT_IMAGE()})"></div>
 											<div class="product_col_name"><c:out value="${ item.PRODUCT.getPRODUCT_NAME() }"></c:out></div>
 										</div>	
 									</td>

@@ -42,6 +42,26 @@ public class User {
 		USER_FULL_NAME = uSER_FULL_NAME;
 	}
 	
+	public User(String uSER_NAME, String uSER_PASSWORD, String uSER_EMAIL, String uSER_PHONE_NUMBER, int uSER_ROLE) {
+		USER_NAME = uSER_NAME;
+		USER_PASSWORD = uSER_PASSWORD;
+		USER_EMAIL = uSER_EMAIL;
+		USER_PHONE_NUMBER = uSER_PHONE_NUMBER;
+		USER_ROLE = uSER_ROLE;
+	}
+
+	
+
+	public User(String uSER_FULL_NAME, String uSER_EMAIL, String uSER_PHONE_NUMBER, String uSER_ADDRESS, String uSER_DOB, int uSER_GENDER) {
+		super();
+		USER_EMAIL = uSER_EMAIL;
+		USER_PHONE_NUMBER = uSER_PHONE_NUMBER;
+		USER_ADDRESS = uSER_ADDRESS;
+		USER_FULL_NAME = uSER_FULL_NAME;
+		USER_GENDER = uSER_GENDER;
+		USER_DOB = uSER_DOB;
+	}
+
 	public String getUSER_ID() {
 		return USER_ID;
 	}

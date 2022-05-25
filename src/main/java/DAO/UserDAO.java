@@ -6,12 +6,12 @@ public class UserDAO {
 	public boolean Save(User user) {
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement  stmt = conn.prepareStatement("INSERT INTO USER(USER_NAME, USER_PASSWORD, USER_FULL_NAME, USER_PHONE_NUMBER, USER_EMAIL) VALUES(?,?,?,?,?)");
+			PreparedStatement  stmt = conn.prepareStatement("INSERT INTO USER(USER_NAME, USER_PASSWORD, USER_PHONE_NUMBER, USER_EMAIL, USER_ROLE) VALUES(?,?,?,?,?)");
 			stmt.setString(1, user.getUSER_NAME());
 			stmt.setString(2, user.getUSER_PASSWORD());
-			stmt.setString(3, user.getUSER_FULL_NAME());
-			stmt.setString(4, user.getUSER_PHONE_NUMBER());
-			stmt.setString(5, user.getUSER_EMAIL());
+			stmt.setString(3, user.getUSER_PHONE_NUMBER());
+			stmt.setString(4, user.getUSER_EMAIL());
+			stmt.setInt(5, user.getUSER_ROLE());
 			
 			int result = stmt.executeUpdate();
 			conn.close();
@@ -26,11 +26,27 @@ public class UserDAO {
 		return false;
 	}
 	
-	public boolean Remove(int USER_ID) {
+	public boolean Delete(String USER_ID) {
 		try {			
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement  stmt = conn.prepareStatement("UPDATE USER SET IS_DISABLED = 1 WHERE id=?");
-			stmt.setInt(1, USER_ID);
+			PreparedStatement  stmt = conn.prepareStatement("UPDATE USER SET IS_DISABLED = 1 WHERE USER_ID=?");
+			stmt.setString(1, USER_ID);
+			int result = stmt.executeUpdate();
+			conn.close();
+			stmt.close();
+			if(result != 0)
+				return true;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean CancelDelete(String USER_ID) {
+		try {			
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement  stmt = conn.prepareStatement("UPDATE USER SET IS_DISABLED = 0 WHERE USER_ID=?");
+			stmt.setString(1, USER_ID);
 			int result = stmt.executeUpdate();
 			conn.close();
 			stmt.close();
@@ -84,8 +100,7 @@ public class UserDAO {
 				user.setUSER_ROLE(result.getInt("USER_ROLE"));
 				
 			}		
-			stmt.close();
-			conn.close();
+			
 			return user;
 			
 		}catch(SQLException e) {

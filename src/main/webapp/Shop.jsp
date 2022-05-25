@@ -48,7 +48,7 @@
 							<div class="menu_item">
 								<div class="title">Theo giá</div>
 								<div class="price_bar_container">
-									<input type="range" name="price-range" min="0" max="999000" step="10000" value=500000 class="price_bar">
+									<input type="range" name="price-range" min="0" max="99000" step="1000" value=50000 class="price_bar">
 									<div class="range_show">Tối đa: <span class="range_value">0</span></div>
 									<div class="apply_price_range_button" onClick="insertParam('max', priceRangeBar.value)">Áp dụng</div>
 								</div>
@@ -161,10 +161,12 @@
 			}
 		})
 
-		function insertParam(key, value) {
+		function insertParam(key, value) {			
 		    key = encodeURIComponent(key);
 		    value = encodeURIComponent(value);
 
+		    
+		    
 		    // kvp looks like ['key1=value1', 'key2=value2', ...]
 		    var kvp = document.location.search.substr(1).split('&');
 		    let i=0;

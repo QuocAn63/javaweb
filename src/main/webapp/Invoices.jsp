@@ -50,7 +50,7 @@
 											<c:forEach items="${ invoice.list }" var="product">
 												<div class="invoice_product">
 													<div class="image_holder">
-														<div class="image" style="background-image: url(./img/product.webp)"></div>
+														<div class="image" style="background-image: url(${ product.PRODUCT.getPRODUCT_IMAGE()})"></div>
 													</div>
 													<div class="informations">
 														<div class="name"><c:out value="${ product.PRODUCT.getPRODUCT_NAME() }"></c:out></div>

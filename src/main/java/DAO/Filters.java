@@ -9,7 +9,7 @@ public class Filters {
 	String SORTBY;
 	String q;
 	int LIMIT = 20;
-	int PAGE = 1;
+	int PAGE;
 	
 	public Filters() {
 		super();
@@ -113,7 +113,7 @@ public class Filters {
 		}
 		
 		if(SEASON != null) {
-			list.add("SEASON = '" + this.SEASON + "' || SEASON = 'all' ");
+			list.add("( SEASON = '" + this.SEASON + "' || SEASON = 'all' )");
 		}
 		
 		query += String.join(" AND ", list);
@@ -128,6 +128,7 @@ public class Filters {
 	public String getLimitQuery() {
 		String query = this.getQuery();
 		
+		System.out.println(PAGE);
 		int Offset = (PAGE - 1)*LIMIT;
 		query += " LIMIT " + Offset + " , " + LIMIT + " ";
 		

@@ -102,9 +102,11 @@ public class Admin extends HttpServlet implements AccountChecker {
 	
 	private void AdminShop(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ProductDAO DAO = new ProductDAO();
-		ArrayList<DAO.Product> list = DAO.getAll();
+		ArrayList<DAO.Product> list = DAO.getAll(0);
+		int DeletedLength = DAO.getProductsLength(1);
 		
 		request.setAttribute("PRODUCTS", list);
+		request.setAttribute("DELETED_LENGTH", DeletedLength);
 		request.getRequestDispatcher("Admin.jsp").forward(request, response);
 	}
 	

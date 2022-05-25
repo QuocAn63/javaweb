@@ -49,11 +49,13 @@
 							<c:forEach items="${ Products }" var="product">
 								<div class="col c-3">
 									<div class="product">
-										<div class="image" style="background-image: url(./img/product.webp)"></div>
-										<div class="informations">
-											<div class="title">${ product.getPRODUCT_NAME() }</div>
-											<div class="price">${ product.getPRODUCT_PRICE() }</div>
-										</div>
+										<a href="Product?PRODUCT_ID=${product.PRODUCT_ID}">
+											<div class="image" style="background-image: url(${ product.getPRODUCT_IMAGE()})"></div>
+											<div class="informations">
+												<div class="title">${product.PRODUCT_NAME}</div>
+												<div class="price">${product.PRODUCT_PRICE}</div>
+											</div>
+										</a>
 									</div>
 								</div>									
 							</c:forEach>

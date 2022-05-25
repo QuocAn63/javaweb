@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+#admin_shop .admin_shop_controller {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+}
+
 #admin_shop .admin_shop_controller .button {
 	display: inline-block;
 	background-color: var(--button-color);
@@ -9,6 +15,10 @@
 	text-align: center;
 	border-radius: 4px;
 	transition: all ease .3s;
+}
+
+#admin_shop .admin_shop_controller .button.delete {
+	background-color: var(--red-color);
 }
 
 #admin_shop .admin_shop_controller .button:hover {

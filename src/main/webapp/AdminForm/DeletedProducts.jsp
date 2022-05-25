@@ -20,15 +20,14 @@
 <script type="text/javascript" src="./js/Admin.js" defer></script>
 </head>
 <body>
-	<%@include file="./AdminHeader.jsp" %>
+	<%@include file="../AdminHeader.jsp" %>
 
-	<%@include file="./AdminSidebar.jsp" %>
+	<%@include file="../AdminSidebar.jsp" %>
 	
 	<div id="admin_content_container">
 		<div id="admin_shop">
 			<div class="admin_shop_controller">
-				<a href="AdminProduct?action=new" class="button">Thêm sản phẩm</a>
-				<a href="AdminProduct?action=delete" class="button delete">Sản phẩm đã xoá <c:if test="${ DELETED_LENGTH != 0 }">(${ DELETED_LENGTH })</c:if></a>
+				<a href="Admin?site=shop" class="button">Tất cả sản phẩm</a>
 			</div>
 			<div class="admin_shop_main">
 				<form id="product_form" style="display: none"></form>
@@ -82,8 +81,7 @@
 								<td style="text-align: left"><c:out value="${ PRODUCT.getPRODUCT_DESCRIPTION() }"></c:out></td>
 								<td>
 									<div class="column_controllers">
-										<a href="AdminProduct?action=update&PRODUCT_ID=${ PRODUCT.getPRODUCT_ID() }" class="button edit">Sửa</a>
-										<a onClick="handleDeleteProduct(${PRODUCT.getPRODUCT_ID()})" class="button delete">Xoá</a>
+										<div onClick="handleCancelProduct(${ PRODUCT.getPRODUCT_ID() })" class="button delete">Huỷ</div>
 									</div>
 								</td>
 							</tr>

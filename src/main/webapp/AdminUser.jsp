@@ -27,7 +27,7 @@
 	<div id="admin_content_container">
 		<div id="admin_shop">
 			<div class="admin_shop_controller">
-				<div class="button">Thêm người dùng</div>
+				<a href="AdminUser?action=new" class="button">Thêm người dùng</a>
 			</div>
 			<div class="admin_shop_main">
 				<table id="admin_shop_table">
@@ -57,7 +57,7 @@
 								<td><c:out value="${ USER.getIS_DISABLED() }"></c:out></td>
 								<td>
 									<div class="column_controllers">
-										<div class="button edit">Sửa</div>
+										<a href="AdminUser?action=update&USER_NAME=${USER.getUSER_NAME() }" class="button edit">Sửa</a>
 										<div class="button delete">Xoá</div>
 									</div>
 								</td>

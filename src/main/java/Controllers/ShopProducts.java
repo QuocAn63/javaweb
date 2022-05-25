@@ -46,6 +46,7 @@ public class ShopProducts extends HttpServlet {
 		String priceFilter = request.getParameter("max");
 		String seasonFilter = request.getParameter("season");
 		String sortbyFilter = request.getParameter("sortby");
+		String page = request.getParameter("page");
 		String keyword = request.getParameter("q");
 		
 		if(categoryFilter != null) {
@@ -64,6 +65,11 @@ public class ShopProducts extends HttpServlet {
 		}
 		if(keyword != null) {
 			Filters.setQ(keyword);
+		}
+		if(page != null) {
+			Filters.setPAGE(Integer.parseInt(page));
+		} else {
+			Filters.setPAGE(1);
 		}
 		
 		ProductDAO proDAO = new ProductDAO();
