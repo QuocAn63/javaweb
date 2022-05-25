@@ -100,7 +100,7 @@
 									<div class="col c-3">
 											<div class="product">
 												<a href="<%= request.getContextPath() %>/Product?PRODUCT_ID=${item.PRODUCT_ID}">
-													<div class="image" style="background-image: url(./img/product.webp)"></div>
+													<div class="image" style="background-image: url(${ item.getPRODUCT_IMAGE()})"></div>
 													<div class="informations">
 														<div class="title">${item.PRODUCT_NAME}</div>
 														<div class="price">${item.PRODUCT_PRICE}</div>

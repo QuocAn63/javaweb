@@ -10,3 +10,7 @@
 	margin-right: var(--sidebar-width);
 	 
 }
+
+#admin_form {
+	margin-top: calc(var(--header-height) + 60px);
+}

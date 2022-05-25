@@ -78,3 +78,131 @@
 #admin_shop_table .column_controllers .button.delete {
 	background-color: var(--red-color);
 }
+
+#admin_form #admin_product_adding_form .hero_title {
+	font-size: 2.2rem;
+	color: var(--button-color);
+	font-weight: bold;
+	padding: 15px 0;
+	text-transform: capitalize;
+}
+
+#admin_form #admin_product_adding_form .form_container{
+	border: 1px solid #e7e7e7;
+    border-radius: 20px;
+    box-shadow: inset 1px 1px 0 0 #fff, 1px 1px 0 0 #fff;
+    padding: 20px;
+}
+
+#admin_form #admin_product_adding_form .form_container .text_area + .text_area {
+	margin-top: 15px;
+}
+
+#admin_form #admin_product_adding_form .form_container .text_area .label {
+	font-size: 1.6rem;
+	color: var(--button-color);
+	font-weight: bold;
+	padding: 8px 0;
+}
+
+#admin_form #admin_product_adding_form .form_container .text_area .input_wrapper {
+	height: 40px;
+	padding: 0 12px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+}
+
+#admin_form #admin_product_adding_form .form_container .text_area .input_box {
+	border: 0;
+	outline: 0;
+	font-size: 1.5rem;
+	height: 38px;
+}
+
+#admin_form #admin_product_adding_form .image_preview_side {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#admin_form #admin_product_adding_form .form_container .text_area .product_description {
+	width: 100%;
+	min-height: 200px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 4px;	
+	outline: none;
+	padding: 8px;
+	resize: vertical;
+}
+
+#admin_form #admin_product_adding_form .form_container .text_area .select-wrapper select {
+	font-size: 1.5rem;
+	padding: 8px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	outline: none;
+}
+
+.select_container {
+	display: flex;
+	align-items: center;
+	gap: 40px;
+}
+
+#admin_form #admin_product_adding_form .image_preview_side .label {
+	font-size: 2rem;
+	color: var(--button-color);
+	font-weight: bold;
+	text-align: center;
+	padding: 15px 0;
+}
+
+#admin_form #admin_product_adding_form .image_preview_side .image_holder {
+	width: 300px;
+	height: 300px;
+	border: 1px solid #e7e7e7;
+    border-radius: 20px;
+    box-shadow: inset 1px 1px 0 0 #fff, 1px 1px 0 0 #fff;
+    position: relative;
+}
+
+#admin_form #admin_product_adding_form .image_preview_side .image_holder .image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#admin_form #admin_product_adding_form .image_preview_side .image_controller {
+	margin-top: 40px;
+}
+
+#admin_form #admin_product_adding_form .image_preview_side .image_controller input {
+	display: none;
+}
+
+#admin_form #admin_product_adding_form .image_preview_side .image_controller .button {
+	background-color: var(--button-color);
+	color: #fff;
+	border-radius: 6px;
+	border: 1px solid var(--button-color);
+}
+
+#admin_form .form_controller {
+	text-align: center;
+	margin-top: 40px;
+}
+
+#admin_form .form_controller .button {
+	background-color: var(--button-color);
+	color: #fff;
+	border-radius: 6px;
+	border: 1px solid var(--button-color);
+	padding: 10px 30px;
+	font-size: 2rem;
+}
+

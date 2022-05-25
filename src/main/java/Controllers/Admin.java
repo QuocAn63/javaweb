@@ -1,13 +1,17 @@
 package Controllers;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import DAO.Category;
 import DAO.CategoryDAO;
@@ -23,6 +27,7 @@ import Interface.AccountChecker;
 /**
  * Servlet implementation class Admin
  */
+@MultipartConfig
 @WebServlet("/Admin")
 public class Admin extends HttpServlet implements AccountChecker {
 	private static final long serialVersionUID = 1L;
@@ -134,5 +139,4 @@ public class Admin extends HttpServlet implements AccountChecker {
 		request.setAttribute("USERS", list);
 		request.getRequestDispatcher("AdminUser.jsp").forward(request, response);
 	}
-	
 }

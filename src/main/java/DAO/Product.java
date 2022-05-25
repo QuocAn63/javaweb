@@ -10,6 +10,7 @@ public class Product {
 	String COUNTRY;
 	String COUNTRY_NAME;
 	String PRODUCT_IMAGE;
+	String PRODUCT_DESCRIPTION;
 	int IS_DISABLED;
 	
 	public Product() {
@@ -24,12 +25,25 @@ public class Product {
 		PRODUCT_IMAGE = pRODUCT_IMAGE;
 	}
 
-	public Product(String pRODUCT_ID, String pRODUCT_NAME, Double pRODUCT_PRICE, String cATEGORY, String cATEGORY_NAME, String sEASON,
+	public Product(String pRODUCT_NAME, Double pRODUCT_PRICE, String pRODUCT_DESCRIPTION, String cATEGORY, String sEASON,
+			String cOUNTRY, String pRODUCT_IMAGE) {
+		super();
+		PRODUCT_NAME = pRODUCT_NAME;
+		PRODUCT_PRICE = pRODUCT_PRICE;
+		CATEGORY = cATEGORY;
+		SEASON = sEASON;
+		COUNTRY = cOUNTRY;
+		PRODUCT_IMAGE = pRODUCT_IMAGE;
+		PRODUCT_DESCRIPTION = pRODUCT_DESCRIPTION;
+	}
+
+	public Product(String pRODUCT_ID, String pRODUCT_NAME, Double pRODUCT_PRICE, String pRODUCT_DESCRIPTION, String cATEGORY, String cATEGORY_NAME, String sEASON,
 			String cOUNTRY, String cOUNTRY_NAME, String pRODUCT_IMAGE, int iS_DISABLED) {
 		super();
 		PRODUCT_ID = pRODUCT_ID;
 		PRODUCT_NAME = pRODUCT_NAME;
 		PRODUCT_PRICE = pRODUCT_PRICE;
+		PRODUCT_DESCRIPTION = pRODUCT_DESCRIPTION;
 		CATEGORY = cATEGORY;
 		CATEGORY_NAME = cATEGORY_NAME;
 		SEASON = sEASON;
@@ -82,6 +96,14 @@ public class Product {
 
 	public String getCOUNTRY_NAME() {
 		return COUNTRY_NAME;
+	}
+
+	public String getPRODUCT_DESCRIPTION() {
+		return PRODUCT_DESCRIPTION;
+	}
+
+	public void setPRODUCT_DESCRIPTION(String pRODUCT_DESCRIPTION) {
+		PRODUCT_DESCRIPTION = pRODUCT_DESCRIPTION;
 	}
 
 	public void setCOUNTRY_NAME(String cOUNTRY_NAME) {

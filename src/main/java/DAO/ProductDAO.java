@@ -19,30 +19,36 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ProductDAO")
 public class ProductDAO extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public ProductDAO() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    public boolean Insert(DAO.Product Product) {
+    	try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO PRODUCT(PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_DESCRIPTION, CATEGORY, SEASON, COUNTRY, PRODUCT_IMAGE) VALUES(?, ?, ?, ?, ? ,? , ?)");
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+			stmt.setString(1, Product.getPRODUCT_NAME());
+			stmt.setDouble(2, Product.getPRODUCT_PRICE());
+			stmt.setString(3, Product.getPRODUCT_DESCRIPTION());
+			stmt.setString(4, Product.getCATEGORY());
+			System.out.println( Product.getCATEGORY());
+			stmt.setString(5, Product.getSEASON());
+			stmt.setString(6, Product.getCOUNTRY());
+			stmt.setString(7, Product.getPRODUCT_IMAGE());
+			
+			int result = stmt.executeUpdate();
+			stmt.close();
+			conn.close();
+			
+			return result != 0;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+    }
 	
 	public Product getProduct(String PRODUCT_ID) {
 		Product product = new Product();
@@ -77,7 +83,7 @@ public class ProductDAO extends HttpServlet {
 	public ArrayList<Product> getAll() {
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PRODUCT");
+			PreparedStatement stmt = conn.prepareStatement("SELECT *, PRODUCT.IS_DISABLED FROM PRODUCT JOIN CATEGORY ON CATEGORY.CATEGORY_ID = PRODUCT.CATEGORY JOIN COUNTRY ON COUNTRY.COUNTRY_ID = PRODUCT.COUNTRY");
 			ResultSet result = stmt.executeQuery();
 			ArrayList<Product> list = new ArrayList<Product>();
 			
@@ -87,8 +93,11 @@ public class ProductDAO extends HttpServlet {
 				product.setPRODUCT_NAME(result.getString("PRODUCT_NAME"));
 				product.setPRODUCT_PRICE(result.getDouble("PRODUCT_PRICE"));
 				product.setCATEGORY(result.getString("CATEGORY"));
+				product.setCATEGORY_NAME(result.getString("CATEGORY_NAME"));
 				product.setSEASON(result.getString("SEASON"));
+				product.setCOUNTRY_NAME(result.getString("COUNTRY_NAME"));
 				product.setCOUNTRY(result.getString("COUNTRY"));
+				product.setPRODUCT_DESCRIPTION(result.getString("PRODUCT_DESCRIPTION"));
 				product.setPRODUCT_IMAGE(result.getString("PRODUCT_IMAGE"));
 				product.setIS_DISABLED(result.getInt("IS_DISABLED"));
 				list.add(product);

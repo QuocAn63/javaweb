@@ -27,7 +27,7 @@
 	<div id="admin_content_container">
 		<div id="admin_shop">
 			<div class="admin_shop_controller">
-				<div class="button">Thêm sản phẩm</div>
+				<a href="AdminProduct?action=new" class="button">Thêm sản phẩm</a>
 			</div>
 			<div class="admin_shop_main">
 				<table id="admin_shop_table">
@@ -50,16 +50,34 @@
 								<td>
 									<div class="product_col">
 										<div class="image_holder">
-											<div class="image" style="background-image: url(./img/product.webp)"></div>
+											<div class="image" style="background-image: url(${ PRODUCT.getPRODUCT_IMAGE()})"></div>
 										</div>
 										<div class="name"><c:out value="${ PRODUCT.getPRODUCT_NAME() }"></c:out></div>
 									</div>
 								</td>
 								<td><c:out value="${ PRODUCT.getPRODUCT_PRICE() }"></c:out></td>
-								<td><c:out value="${ PRODUCT.getCATEGORY() }"></c:out></td>
-								<td><c:out value="${ PRODUCT.getSEASON() }"></c:out></td>
-								<td><c:out value="${ PRODUCT.getCOUNTRY() }"></c:out></td>
-								<td></td>
+								<td><c:out value="${ PRODUCT.getCATEGORY_NAME() }"></c:out></td>
+								<td>
+									<c:choose>
+										<c:when test="${ PRODUCT.getSEASON() == 'spring' }">
+											Xuân
+										</c:when>
+										<c:when test="${ PRODUCT.getSEASON() == 'summer' }">
+											Hạ
+										</c:when>
+										<c:when test="${ PRODUCT.getSEASON() == 'attumn' }">
+											Thu
+										</c:when>
+										<c:when test="${ PRODUCT.getSEASON() == 'winter' }">
+											Đông
+										</c:when>
+										<c:otherwise>
+											Tất cả
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td><c:out value="${ PRODUCT.getCOUNTRY_NAME() }"></c:out></td>
+								<td style="text-align: left"><c:out value="${ PRODUCT.getPRODUCT_DESCRIPTION() }"></c:out></td>
 								<td>
 									<div class="column_controllers">
 										<div class="button edit">Sửa</div>
