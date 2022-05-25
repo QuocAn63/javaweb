@@ -99,6 +99,7 @@
 								</div>
 								<div class="col c-12">
 									<div class="form_controller">
+										<a href="Admin?site=shop" class="button back">Trở về</a>
 										<button class="button">Thêm</button>
 									</div>
 								</div>

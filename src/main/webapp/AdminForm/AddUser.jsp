@@ -71,6 +71,7 @@
 								</div>
 								<div class="col c-12">
 									<div class="form_controller">
+										<a href="Admin?site=user" class="button back">Trở về</a>
 										<button class="button">Thêm</button>
 									</div>
 								</div>

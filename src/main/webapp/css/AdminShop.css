@@ -217,3 +217,9 @@
 	font-size: 2rem;
 }
 
+#admin_form .form_controller .button.back {
+	background-color: #fff;
+	color: var(--text-color);
+	margin-right: 10px;
+	padding: 8px 30px;
+}

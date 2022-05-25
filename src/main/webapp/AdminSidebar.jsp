@@ -6,31 +6,31 @@
 	<div class="horizontal"></div>
 	<div class="sidebar_item_container">
 		<div class="sidebar_item">
-			<a href="?site=shop" class="sidebar_item_link" data-site="shop">
+			<a href="Admin?site=shop" class="sidebar_item_link" data-site="shop">
 				<i class="fa-solid fa-shop sidebar_item_icon"></i>
 				<span class="sidebar_item_link_title">Cửa hàng</span>
 			</a>
 		</div>
 		<div class="sidebar_item">
-			<a href="?site=category" class="sidebar_item_link" data-site="category">
+			<a href="Admin?site=category" class="sidebar_item_link" data-site="category">
 				<i class="fa-solid fa-certificate sidebar_item_icon"></i>
 				<span class="sidebar_item_link_title">Danh mục</span>
 			</a>
 		</div>
 		<div class="sidebar_item">
-			<a href="?site=country" class="sidebar_item_link" data-site="country">
+			<a href="Admin?site=country" class="sidebar_item_link" data-site="country">
 				<i class="fa-solid fa-globe sidebar_item_icon"></i>
 				<span class="sidebar_item_link_title">Xuất xứ</span>
 			</a>
 		</div>
 		<div class="sidebar_item">
-			<a href="?site=invoice" class="sidebar_item_link" data-site="invoice">
+			<a href="Admin?site=invoice" class="sidebar_item_link" data-site="invoice">
 				<i class="fa-solid fa-file-lines sidebar_item_icon"></i>
 				<span class="sidebar_item_link_title">Hoá đơn</span>
 			</a>
 		</div>
 		<div class="sidebar_item">
-			<a href="?site=user" class="sidebar_item_link" data-site="user">
+			<a href="Admin?site=user" class="sidebar_item_link" data-site="user">
 				<i class="fa-solid fa-users sidebar_item_icon"></i>
 				<span class="sidebar_item_link_title">Người dùng</span>
 			</a>
