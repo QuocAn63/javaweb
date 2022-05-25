@@ -50,8 +50,6 @@ public class User {
 		USER_ROLE = uSER_ROLE;
 	}
 
-	
-
 	public User(String uSER_FULL_NAME, String uSER_EMAIL, String uSER_PHONE_NUMBER, String uSER_ADDRESS, String uSER_DOB, int uSER_GENDER) {
 		super();
 		USER_EMAIL = uSER_EMAIL;

@@ -55,23 +55,31 @@
 											<div class="label">Địa chỉ</div>
 											<textarea class="product_description" name="USER_ADDRESS"><c:out value='${ USER.getUSER_ADDRESS() }' ></c:out></textarea>
 										</div>
-										<div class="text_area select_text_area">
-											<div class="label">Vai trò</div>
-											<div class="select-wrapper">
-												<select name="USER_ROLE">
-													<c:forEach items="${ ROLES }" var="ROLE">
-														<option value="${ROLE.getROLE_ID() }">${ROLE.getROLE_NAME()}</option>
-													</c:forEach>
-												</select>
+										<div class="text_area select_container">
+											<div class="select_text_area">
+												<div class="label">Giới tính</div>
+												<div class="select-wrapper">
+													<select name="USER_GENDER" value="${ USER.getUSER_GENDER() }">
+														<option value="0">Nam</option>
+														<option value="1">Nữ</option>
+													</select>
+												</div>
 											</div>
-										</div>
-										<div class="text_area select_text_area">
-											<div class="label">Tình trạng</div>
-											<div class="select-wrapper">
-												<select name="IS_DISABLED">
-													<option value="0">Hoạt động</option>
-													<option value="1">Ngưng hoạt động</option>
-												</select>
+											<div class="select_text_area">
+												<div class="label">Ngày sinh</div>
+												<div class="select-wrapper">
+													<input type="date" name="USER_DOB" class="user_date_input" value="${ USER.getUSER_DOB() }">
+												</div>
+											</div>
+											<div class="select_text_area">
+												<div class="label">Vai trò</div>
+												<div class="select-wrapper">
+													<select name="USER_ROLE">
+														<c:forEach items="${ ROLES }" var="ROLE">
+															<option value="${ROLE.getROLE_ID() }">${ROLE.getROLE_NAME()}</option>
+														</c:forEach>
+													</select>
+												</div>
 											</div>
 										</div>
 									</div>

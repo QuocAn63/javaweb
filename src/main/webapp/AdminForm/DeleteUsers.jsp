@@ -20,15 +20,14 @@
 <script type="text/javascript" src="./js/Admin.js" defer></script>
 </head>
 <body>
-	<%@include file="./AdminHeader.jsp" %>
+	<%@include file="../AdminHeader.jsp" %>
 
-	<%@include file="./AdminSidebar.jsp" %>
+	<%@include file="../AdminSidebar.jsp" %>
 	
 	<div id="admin_content_container">
 		<div id="admin_shop">
 			<div class="admin_shop_controller">
-				<a href="AdminUser?action=new" class="button">Thêm người dùng</a>
-				<a href="AdminUser?action=delete" class="button delete">Người dùng đã xoá <c:if test="${ DELETED_LENGTH != 0 }">(${ DELETED_LENGTH })</c:if></a>
+				<a href="Admin?site=user" class="button">Tất cả người dùng</a>
 			</div>
 			<div class="admin_shop_main">
 				<form id="user_form" style="display: none"></form>
@@ -59,8 +58,7 @@
 								<td><c:out value="${ USER.getIS_DISABLED() }"></c:out></td>
 								<td>
 									<div class="column_controllers">
-										<a href="AdminUser?action=update&USER_NAME=${USER.getUSER_NAME() }" class="button edit">Sửa</a>
-										<div onClick="handleDeleteUser(${USER.getUSER_ID()})" class="button delete">Xoá</div>
+										<a onClick="handleCancelUser(${USER.getUSER_ID()})" class="button edit">Huỷ</a>
 									</div>
 								</td>
 							</tr>

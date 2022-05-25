@@ -50,3 +50,19 @@ const handleCancelProduct = (PRODUCT_ID) => {
 	
 	form.submit();
 }
+
+const handleDeleteUser = (USER_ID) => {
+	var form = document.querySelector("#user_form")
+	form.action = `AdminUser?action=delete&USER_ID=${ USER_ID }`;
+	form.method = "POST";
+	
+	form.submit();
+}
+
+const handleCancelUser = (USER_ID) => {
+	var form = document.querySelector("#user_form")
+	form.action = `AdminUser?action=cancel&USER_ID=${ USER_ID }`;
+	form.method = "POST";
+	
+	form.submit();
+}

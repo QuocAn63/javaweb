@@ -146,6 +146,7 @@
 	resize: vertical;
 }
 
+#admin_form #admin_product_adding_form .form_container .text_area .select-wrapper input[type="date"],
 #admin_form #admin_product_adding_form .form_container .text_area .select-wrapper select {
 	font-size: 1.5rem;
 	padding: 8px;

@@ -95,6 +95,7 @@ public class UserDAO {
 				user.setUSER_PHONE_NUMBER(result.getString("USER_PHONE_NUMBER"));
 				user.setUSER_FULL_NAME(result.getString("USER_FULL_NAME"));
 				user.setUSER_DOB(result.getString("USER_DOB"));
+				user.setUSER_ADDRESS(result.getString("USER_ADDRESS"));
 				user.setUSER_GENDER(result.getInt("USER_GENDER"));
 				user.setIS_DISABLED(result.getInt("IS_DISABLED"));
 				user.setUSER_ROLE(result.getInt("USER_ROLE"));
@@ -140,6 +141,55 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public ArrayList<User> getAll(int value){
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM User WHERE IS_DISABLED = ?");
+			stmt.setInt(1, value);
+			ResultSet result = stmt.executeQuery();
+			ArrayList<User> list = new ArrayList<User>();
+			
+			while(result.next()) {
+				User user = new User();
+				user.setUSER_ID(result.getString("USER_ID"));
+				user.setUSER_EMAIL(result.getString("USER_EMAIL"));
+				user.setUSER_NAME(result.getString("USER_NAME"));
+				user.setUSER_PASSWORD(result.getString("USER_PASSWORD"));
+				user.setUSER_PHONE_NUMBER(result.getString("USER_PHONE_NUMBER"));
+				user.setUSER_FULL_NAME(result.getString("USER_FULL_NAME"));
+				user.setUSER_DOB(result.getString("USER_DOB"));
+				user.setUSER_ADDRESS(result.getString("USER_ADDRESS"));
+				user.setUSER_GENDER(result.getInt("USER_GENDER"));
+				user.setIS_DISABLED(result.getInt("IS_DISABLED"));
+				user.setUSER_ROLE(result.getInt("USER_ROLE"));
+				list.add(user);
+			}
+			
+			stmt.close();
+			conn.close();
+			
+			return list;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public int getUsersLength(int value) {
+		try {			
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement  stmt = conn.prepareStatement("SELECT COUNT(USER_ID) AS LENGTH FROM USER WHERE IS_DISABLED = ?");
+			stmt.setInt(1, value);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				return result.getInt("LENGTH");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 	
 	public User Login(String USER_NAME, String USER_PASSWORD) {

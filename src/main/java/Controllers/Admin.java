@@ -136,9 +136,10 @@ public class Admin extends HttpServlet implements AccountChecker {
 	
 	private void AdminUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDAO DAO = new UserDAO();
-		ArrayList<User> list = DAO.getAll();
-		
+		ArrayList<User> list = DAO.getAll(0);
+		int DeletedLength = DAO.getUsersLength(1);
 		request.setAttribute("USERS", list);
+		request.setAttribute("DELETED_LENGTH", DeletedLength);
 		request.getRequestDispatcher("AdminUser.jsp").forward(request, response);
 	}
 }

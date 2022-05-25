@@ -15,6 +15,7 @@ import DAO.Country;
 import DAO.CountryDAO;
 import DAO.Role;
 import DAO.RoleDAO;
+import DAO.User;
 import DAO.UserDAO;
 import Interface.AccountChecker;
 
@@ -51,6 +52,10 @@ public class AdminUser extends HttpServlet implements AccountChecker {
 				}
 				break;
 				
+				case "delete": {
+					openDeleteForm(request, response);
+				}
+				break;
 				default:
 					throw new IllegalArgumentException("Unexpected value: " + action);
 				}
@@ -119,6 +124,13 @@ public class AdminUser extends HttpServlet implements AccountChecker {
 		request.setAttribute("USER", User);
 		request.getRequestDispatcher("./AdminForm/UpdateUser.jsp").forward(request, response);
 	}
+	
+	private void openDeleteForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		UserDAO userDAO = new UserDAO();
+		ArrayList<User> Users = userDAO.getAll(1);
+		request.setAttribute("USERS", Users);
+		request.getRequestDispatcher("./AdminForm/DeleteUsers.jsp").forward(request, response);
+	}
 
 	private void InsertUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String USER_NAME = request.getParameter("USER_NAME");
@@ -136,6 +148,7 @@ public class AdminUser extends HttpServlet implements AccountChecker {
 	}
 	
 	private void UpdateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String USER_ID = request.getParameter("USER_ID");
 		String USER_EMAIL = request.getParameter("USER_EMAIL");
 		String USER_PHONE_NUMBER = request.getParameter("USER_PHONE_NUMBER");
 		String USER_FULL_NAME = request.getParameter("USER_FULL_NAME");
@@ -144,7 +157,15 @@ public class AdminUser extends HttpServlet implements AccountChecker {
 		int USER_GENDER = Integer.parseInt(request.getParameter("USER_GENDER"));
 		
 		UserDAO userDAO = new UserDAO();
-		DAO.User User = new DAO.User(USER_FULL_NAME, USER_EMAIL, USER_PHONE_NUMBER, USER_ADDRESS, USER_DOB, USER_GENDER);
+		DAO.User User = new DAO.User();
+		
+		User.setUSER_ID(USER_ID);
+		User.setUSER_EMAIL(USER_EMAIL);
+		User.setUSER_PHONE_NUMBER(USER_PHONE_NUMBER);
+		User.setUSER_FULL_NAME(USER_FULL_NAME);
+		User.setUSER_ADDRESS(USER_ADDRESS);
+		User.setUSER_DOB(USER_DOB);
+		User.setUSER_GENDER(USER_GENDER);
 		
 		if(userDAO.Update(User)) {
 			response.sendRedirect("Admin?site=user");
@@ -167,7 +188,7 @@ public class AdminUser extends HttpServlet implements AccountChecker {
 		UserDAO userDAO = new UserDAO();
 		
 		if(userDAO.CancelDelete(USER_ID)) {
-			response.sendRedirect("Admin?site=user");
+			response.sendRedirect("AdminUser?action=delete");
 		}
 	}
 	
