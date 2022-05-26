@@ -317,7 +317,6 @@
 	top: 50%;
 	left: 50px;
 	transform: translateY(-50%);
-	width: 40vh;
 }
 
 .slick_slider_container .content .title {
@@ -339,6 +338,7 @@
 .slick_slider_container .content .description {
 	font-size: 2rem;
 	color: var(--text-color);
+	width: 70vh;
 }
 
 .banner_container {
@@ -422,6 +422,8 @@
 	justify-content: center;
 	align-items: center;
 	gap: 40px;
+	width: 100%;
+	background-size: cover;
 }
 
 #footer .footer_item {

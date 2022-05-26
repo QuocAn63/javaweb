@@ -19,10 +19,10 @@
 						Cửa hàng
 					</a>
 					<c:if test="${ sessionScope.account.USER_ROLE == 1 }">
-						<a href="Admin" class="navigation_link">
+						<a href="Admin?site=shop" class="navigation_link">
 							Quản lý sản phẩm
 						</a>
-						<a href="Admin" class="navigation_link">
+						<a href="Admin?site=user" class="navigation_link">
 							Quản lý người dùng
 						</a>			
 					</c:if>

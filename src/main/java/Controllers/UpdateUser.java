@@ -1,6 +1,8 @@
 package Controllers;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,11 +44,15 @@ public class UpdateUser extends HttpServlet {
 	}
 	
 	protected void updateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		request.setCharacterEncoding("utf-8");
+		
 		HttpSession session = request.getSession();
 		User User = (User) session.getAttribute("account");
 		
 		String USER_ID = User.getUSER_ID();
 		String USER_FULL_NAME = request.getParameter("USER_FULL_NAME");
+		USER_FULL_NAME = URLDecoder.decode(USER_FULL_NAME, "UTF-8");
 		String USER_PHONE_NUMBER = request.getParameter("USER_PHONE_NUMBER");
 		String USER_EMAIL = request.getParameter("USER_EMAIL");
 		String USER_ADDRESS = request.getParameter("USER_ADDRESS");

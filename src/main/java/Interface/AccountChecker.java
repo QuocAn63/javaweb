@@ -9,8 +9,8 @@ public interface AccountChecker {
 	public static boolean isLogin(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		Object userObject = session.getAttribute("account");
-
-		return userObject != null;
+		DAO.User User = (DAO.User) userObject;
+		return (userObject != null && User.getIS_DISABLED() != 1);
 	}
 	
 	public static boolean isCartEmpty(HttpServletRequest request) {

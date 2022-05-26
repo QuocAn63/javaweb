@@ -27,6 +27,15 @@
 	<div id="admin_content_container">
 		<div id="admin_shop">
 			<div class="admin_shop_main">
+				<div class="invoice_status_controller">
+					<div class="label">Xem đon hàng: </div>
+					<select onChange="insertParam('status', this.value)" name="INVOICE_STATUS">
+						<option value="all">Tất cả</option>
+						<option value="0">Chờ xử lý</option>
+						<option value="1">Đang giao</option>
+						<option value="2">Đã giao</option>
+					</select>
+				</div>
 				<table id="admin_shop_table">
 					<thead>
 						<tr>
@@ -34,7 +43,7 @@
 							<th>Người nhận</th>
 							<th>Địa chỉ</th>
 							<th>Số điện thoại</th>
-							<th>Tổng hoá đơn</th>
+							<th>Ngày đặt</th>
 							<th>Tình trạng</th>
 							<th>Thay đổi</th>
 						</tr>
@@ -46,11 +55,17 @@
 								<td><c:out value="${ INVOICE.getRECEIVER_FULL_NAME() }"></c:out></td>
 								<td><c:out value="${ INVOICE.getRECEIVER_ADDRESS() }"></c:out></td>
 								<td><c:out value="${ INVOICE.getRECEIVER_PHONE_NUMBER() }"></c:out></td>
-								<td><c:out value="${ INVOICE.getINVOICE_GRAND_TOTAL() }"></c:out></td>
-								<td><c:out value="${ INVOICE.getINVOICE_STATUS() }"></c:out></td>
+								<td><c:out value="${ INVOICE.getINVOICE_CREATED_AT() }"></c:out></td>
+								<td>
+									<c:choose>
+										<c:when test="${ INVOICE.getINVOICE_STATUS() == 1 }">Đang giao</c:when>
+										<c:when test="${ INVOICE.getINVOICE_STATUS() == 2 }">Đã giao</c:when>
+										<c:otherwise>Chờ xử lý</c:otherwise>
+									</c:choose>
+								</td>
 								<td>
 									<div class="column_controllers">
-										<div class="button edit">Sửa</div>
+										<a href="AdminInvoice?INVOICE_ID=${ INVOICE.getINVOICE_ID() }" class="button edit">Xem</a>
 									</div>
 								</td>
 							</tr>

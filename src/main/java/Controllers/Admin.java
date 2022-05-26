@@ -19,6 +19,7 @@ import DAO.Country;
 import DAO.CountryDAO;
 import DAO.Invoice;
 import DAO.InvoiceDAO;
+import DAO.InvoicesFilter;
 import DAO.ProductDAO;
 import DAO.User;
 import DAO.UserDAO;
@@ -128,8 +129,16 @@ public class Admin extends HttpServlet implements AccountChecker {
 
 	private void AdminInvoice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		InvoiceDAO DAO = new InvoiceDAO();
-		ArrayList<Invoice> list = DAO.getAll();
+		String status = request.getParameter("status");
 		
+		InvoicesFilter Filter = new InvoicesFilter();
+		
+		if(status != null) {
+			Filter.setTYPE(status);
+		}
+		
+		ArrayList<Invoice> list = DAO.getAll(Filter);
+
 		request.setAttribute("INVOICES", list);
 		request.getRequestDispatcher("AdminInvoice.jsp").forward(request, response);
 	}

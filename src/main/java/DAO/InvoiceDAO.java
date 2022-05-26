@@ -8,11 +8,96 @@ import java.util.ArrayList;
 
 public class InvoiceDAO {
 	
+	public Invoice getInvoice(String INVOICE_ID) {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM INVOICE WHERE INVOICE_ID = ? ");
+			stmt.setString(1, INVOICE_ID);
+			ResultSet result = stmt.executeQuery();
+			
+			while(result.next()) {
+				Invoice invoice = new Invoice();
+
+				invoice.setINVOICE_ID(INVOICE_ID);
+				invoice.setUSER_ID(result.getString("USER_ID"));
+				invoice.setRECEIVER_FULL_NAME(result.getString("RECEIVER_FULL_NAME"));
+				invoice.setRECEIVER_ADDRESS(result.getString("RECEIVER_ADDRESS"));
+				invoice.setRECEIVER_PHONE_NUMBER(result.getString("RECEIVER_PHONE_NUMBER"));
+				invoice.setINVOICE_GRAND_TOTAL(result.getDouble("INVOICE_GRAND_TOTAL"));
+				invoice.setINVOICE_CREATED_AT(result.getString("INVOICE_CREATED_AT"));
+				invoice.setINVOICE_STATUS(result.getInt("INVOICE_STATUS"));
+				invoice.setList(getAllProductsWithInvoiceID(INVOICE_ID));
+				
+				return invoice;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public boolean UpdateStatus(String INVOICE_ID, int value) {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("UPDATE INVOICE SET INVOICE_STATUS = ? WHERE INVOICE_ID = ? ");
+			stmt.setInt(1, value);
+			stmt.setString(2, INVOICE_ID);
+			
+			int result = stmt.executeUpdate();
+			
+			return result != 0;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
 	public ArrayList<Invoice> getAll() {
 		try {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM INVOICE ORDER BY INVOICE_CREATED_AT DESC ");
 			
+			ResultSet result = stmt.executeQuery();
+			
+			ArrayList<Invoice> list = new ArrayList<Invoice>();
+			
+			while(result.next()) {
+				Invoice invoice = new Invoice();
+				
+				String INVOICE_ID = result.getString("INVOICE_ID");
+
+				invoice.setINVOICE_ID(INVOICE_ID);
+				invoice.setUSER_ID(result.getString("USER_ID"));
+				invoice.setRECEIVER_FULL_NAME(result.getString("RECEIVER_FULL_NAME"));
+				invoice.setRECEIVER_ADDRESS(result.getString("RECEIVER_ADDRESS"));
+				invoice.setRECEIVER_PHONE_NUMBER(result.getString("RECEIVER_PHONE_NUMBER"));
+				invoice.setINVOICE_GRAND_TOTAL(result.getDouble("INVOICE_GRAND_TOTAL"));
+				invoice.setINVOICE_CREATED_AT(result.getString("INVOICE_CREATED_AT"));
+				invoice.setINVOICE_STATUS(result.getInt("INVOICE_STATUS"));
+				invoice.setList(getAllProductsWithInvoiceID(INVOICE_ID));
+				
+				list.add(invoice);
+			}
+			
+			return list;
+			
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public ArrayList<Invoice> getAll(InvoicesFilter Filter) {
+		try {
+			String subQuery = Filter.getSingleQuery();
+			
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM INVOICE " + subQuery + " ORDER BY INVOICE_CREATED_AT DESC ");
+			System.out.println("SELECT * FROM INVOICE " + subQuery + " ORDER BY INVOICE_CREATED_AT DESC ");
 			ResultSet result = stmt.executeQuery();
 			
 			ArrayList<Invoice> list = new ArrayList<Invoice>();

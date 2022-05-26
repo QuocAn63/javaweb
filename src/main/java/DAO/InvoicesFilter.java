@@ -37,4 +37,11 @@ public class InvoicesFilter {
 		return query;
 	}
 	
+	public String getSingleQuery() {
+		if(!isEmpty()) {
+			return " WHERE INVOICE_STATUS = " + TYPE;
+		} else {
+			return "";
+		}
+	}
 }

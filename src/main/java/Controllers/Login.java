@@ -12,12 +12,13 @@ import javax.servlet.http.HttpSession;
 
 import DAO.User;
 import DAO.UserDAO;
+import Interface.EncryptPass;
 
 /**
  * Servlet implementation class Login
  */
 @WebServlet("/Login")
-public class Login extends HttpServlet {
+public class Login extends HttpServlet implements EncryptPass {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -41,24 +42,34 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html; charset=UTF-8");
-		
-		String USER_NAME = request.getParameter("USER_NAME");
-		String USER_PASSWORD = request.getParameter("USER_PASSWORD");
-		
-		User User = new User();
-		UserDAO DAO = new UserDAO();
-		
-		User = DAO.Login(USER_NAME, USER_PASSWORD);	
-		
-		if(User == null) {
-			request.setAttribute("MESSAGE", "Đăng nhập thất bại");
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
-		} else {
-			HttpSession session = request.getSession();
-			session.setAttribute("account", User);
-
-			response.sendRedirect("Home");
+		try {
+			response.setContentType("text/html; charset=UTF-8");
+			
+			String USER_NAME = request.getParameter("USER_NAME");
+			String USER_PASSWORD = request.getParameter("USER_PASSWORD");
+			
+			User User = new User();
+			UserDAO DAO = new UserDAO();
+			
+			User = DAO.Login(USER_NAME, EncryptPass.md5(USER_PASSWORD));	
+			
+			if(User == null) {
+				request.setAttribute("MESSAGE", "Đăng nhập thất bại");
+				request.getRequestDispatcher("Login.jsp").forward(request, response);
+			} else {
+				if(User.getIS_DISABLED() != 1) {
+					HttpSession session = request.getSession();
+					session.setAttribute("account", User);
+					
+					response.sendRedirect("Home");				
+				} else {
+					request.setAttribute("MESSAGE", "Tài khoản đã bị khoá");
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
+				}
+				
+			}
+		} catch (Exception e) {
+			
 		}
 	}
 }
