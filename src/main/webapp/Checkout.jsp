@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,7 +74,7 @@
 												<div class="quantity">x ${ item.getQUANTITY() }</div>
 											</div>
 										</div>
-										<div class="detail_value">${ item.PRODUCT.getPRODUCT_PRICE()*item.getQUANTITY() }</div>
+										<div class="detail_value"><fmt:formatNumber value="${ item.PRODUCT.getPRODUCT_PRICE()*item.getQUANTITY() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></div>
 									</div>
 								</c:forEach>
 							</div>
@@ -82,7 +83,7 @@
 							<div class="detail_container">
 								<div class="detail_item">
 									<div class="detail_title main_title">Tổng hoá đơn</div>
-									<div class="detail_value main_title"><c:out value="${ sessionScope.cart.getTotal() }"></c:out></div>
+									<div class="detail_value main_title"><fmt:formatNumber value="${ sessionScope.cart.getTotal() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></div>
 								</div>
 								<div class="detail_item">
 									<div class="detail_title main_title">Phí vận chuyển</div>
@@ -90,7 +91,7 @@
 								</div>
 								<div class="detail_item">
 									<div class="detail_title main_title">Thành tiền</div>
-									<div class="detail_value main_title main_value"><c:out value="${ sessionScope.cart.getTotal() }"></c:out></div>
+									<div class="detail_value main_title main_value"><fmt:formatNumber value="${ sessionScope.cart.getTotal() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></div>
 								</div>
 							</div>
 							<div class="order_controller">

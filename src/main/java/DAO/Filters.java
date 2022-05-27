@@ -94,10 +94,10 @@ public class Filters {
 		
 		if(this.isEmpty()) {
 			if(SORTBY != null) {
-				return " ORDER BY PRODUCT_PRICE " + this.SORTBY;
+				return "AND PRODUCT.IS_DISABLED = 0 ORDER BY PRODUCT_PRICE " + this.SORTBY;
 			}
 			
-			return "";
+			return "WHERE PRODUCT.IS_DISABLED = 0 ";
 		}
 		
 		if(q != null) {
@@ -122,15 +122,14 @@ public class Filters {
 			query += " ORDER BY PRODUCT_PRICE " + this.SORTBY;
 		}
 		
-		return query;
+		return query + " AND PRODUCT.IS_DISABLED = 0 ";
 	}
 	
 	public String getLimitQuery() {
 		String query = this.getQuery();
 		
-		System.out.println(PAGE);
 		int Offset = (PAGE - 1)*LIMIT;
-		query += " LIMIT " + Offset + " , " + LIMIT + " ";
+		query += "LIMIT " + Offset + " , " + LIMIT + " ";
 		
 		return query;
 	}

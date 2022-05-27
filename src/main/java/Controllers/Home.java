@@ -33,7 +33,7 @@ public class Home extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		ProductDAO DAO = new ProductDAO();
-		ArrayList<DAO.Product> list = DAO.getAll();
+		ArrayList<DAO.Product> list = DAO.getAll(0);
 		request.setAttribute("Products", list);
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}

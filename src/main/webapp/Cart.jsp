@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +54,7 @@
 										</div>	
 									</td>
 									<td>
-										<c:out value="${ item.PRODUCT.getPRODUCT_PRICE() }"></c:out>
+										<fmt:formatNumber value="${ item.PRODUCT.getPRODUCT_PRICE() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/>
 									</td>
 									<td>
 										<div class="product_quantitiy_controller">
@@ -63,7 +64,7 @@
 										</div>
 									</td>
 									<td>
-										<c:out value="${ item.PRODUCT.getPRODUCT_PRICE()*item.getQUANTITY() }"></c:out>
+										<fmt:formatNumber value="${ item.PRODUCT.getPRODUCT_PRICE()*item.getQUANTITY() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/>
 									</td>
 									<td style="width: 80px">
 										<button class="cart_delete_item_button" onClick="removeFromCart(${ item.PRODUCT.getPRODUCT_ID() })">&times;</button>
@@ -71,8 +72,11 @@
 								</tr>
 							</c:forEach>
 							<tr>
-								<td colspan="5">Tổng cộng:</td>
-								<td><c:out value="${ Cart.getTotal() }"></c:out></td>
+								<td colspan="6" style="border-left: 0; border-right: 0"></td>
+							</tr>
+							<tr>
+								<td colspan="4">Tổng cộng:</td>
+								<td colspan="2"><fmt:formatNumber value="${ Cart.getTotal() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></td>
 							</tr>
 						</tbody>
 					</table>

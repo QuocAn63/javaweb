@@ -18,12 +18,13 @@ import DAO.RoleDAO;
 import DAO.User;
 import DAO.UserDAO;
 import Interface.AccountChecker;
+import Interface.EncryptPass;
 
 /**
  * Servlet implementation class AdminUser
  */
 @WebServlet("/AdminUser")
-public class AdminUser extends HttpServlet implements AccountChecker {
+public class AdminUser extends HttpServlet implements AccountChecker, EncryptPass {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -117,9 +118,7 @@ public class AdminUser extends HttpServlet implements AccountChecker {
 		
 		DAO.User User = userDAO.Find(USER_NAME);
 		ArrayList<Role> Roles = roleDAO.getAll();
-		
-		System.out.println(User.getUSER_NAME());
-		
+			
 		request.setAttribute("ROLES", Roles);
 		request.setAttribute("USER", User);
 		request.getRequestDispatcher("./AdminForm/UpdateUser.jsp").forward(request, response);
@@ -133,17 +132,21 @@ public class AdminUser extends HttpServlet implements AccountChecker {
 	}
 
 	private void InsertUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String USER_NAME = request.getParameter("USER_NAME");
-		String USER_PASSWORD = request.getParameter("USER_PASSWORD");
-		String USER_EMAIL = request.getParameter("USER_EMAIL");
-		String USER_PHONE_NUMBER = request.getParameter("USER_PHONE_NUMBER");
-		int USER_ROLE = Integer.parseInt(request.getParameter("USER_ROLE"));
-		
-		UserDAO userDAO = new UserDAO();
-		DAO.User User = new DAO.User(USER_NAME, USER_PASSWORD, USER_EMAIL, USER_PHONE_NUMBER, USER_ROLE);
-		
-		if(userDAO.Save(User)) {
-			response.sendRedirect("Admin?site=user");
+		try {
+			String USER_NAME = request.getParameter("USER_NAME");
+			String USER_PASSWORD = request.getParameter("USER_PASSWORD");
+			String USER_EMAIL = request.getParameter("USER_EMAIL");
+			String USER_PHONE_NUMBER = request.getParameter("USER_PHONE_NUMBER");
+			int USER_ROLE = Integer.parseInt(request.getParameter("USER_ROLE"));
+			
+			UserDAO userDAO = new UserDAO();
+			DAO.User User = new DAO.User(USER_NAME, EncryptPass.md5(USER_PASSWORD), USER_EMAIL, USER_PHONE_NUMBER, USER_ROLE);
+			
+			if(userDAO.Save(User)) {
+				response.sendRedirect("Admin?site=user");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -155,6 +158,7 @@ public class AdminUser extends HttpServlet implements AccountChecker {
 		String USER_DOB = request.getParameter("USER_DOB");
 		String USER_ADDRESS = request.getParameter("USER_ADDRESS");
 		int USER_GENDER = Integer.parseInt(request.getParameter("USER_GENDER"));
+		int USER_ROLE = Integer.parseInt(request.getParameter("USER_ROLE"));
 		
 		UserDAO userDAO = new UserDAO();
 		DAO.User User = new DAO.User();
@@ -166,6 +170,7 @@ public class AdminUser extends HttpServlet implements AccountChecker {
 		User.setUSER_ADDRESS(USER_ADDRESS);
 		User.setUSER_DOB(USER_DOB);
 		User.setUSER_GENDER(USER_GENDER);
+		User.setUSER_ROLE(USER_ROLE);
 		
 		if(userDAO.Update(User)) {
 			response.sendRedirect("Admin?site=user");

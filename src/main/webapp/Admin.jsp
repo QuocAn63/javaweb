@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,7 @@
 										<div class="name"><c:out value="${ PRODUCT.getPRODUCT_NAME() }"></c:out></div>
 									</div>
 								</td>
-								<td><c:out value="${ PRODUCT.getPRODUCT_PRICE() }"></c:out></td>
+								<td><fmt:formatNumber value="${ PRODUCT.getPRODUCT_PRICE() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></td>
 								<td><c:out value="${ PRODUCT.getCATEGORY_NAME() }"></c:out></td>
 								<td>
 									<c:choose>

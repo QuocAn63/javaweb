@@ -61,14 +61,15 @@ public class UserDAO {
 	public boolean Update(User user) {
 		try {			
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement  stmt = conn.prepareStatement("UPDATE USER SET USER_FULL_NAME = ?, USER_PHONE_NUMBER = ?, USER_ADDRESS = ?, USER_EMAIL = ?, USER_GENDER = ?, USER_DOB = ? WHERE USER_ID = ? ");
+			PreparedStatement  stmt = conn.prepareStatement("UPDATE USER SET USER_FULL_NAME = ?, USER_PHONE_NUMBER = ?, USER_ADDRESS = ?, USER_EMAIL = ?, USER_GENDER = ?, USER_DOB = ?, USER_ROLE = ? WHERE USER_ID = ? ");
 			stmt.setString(1, user.getUSER_FULL_NAME());
 			stmt.setString(2, user.getUSER_PHONE_NUMBER());
 			stmt.setString(3, user.getUSER_ADDRESS());
 			stmt.setString(4, user.getUSER_EMAIL());
 			stmt.setInt(5, user.getUSER_GENDER());
 			stmt.setString(6, user.getUSER_DOB());
-			stmt.setString(7, user.getUSER_ID());
+			stmt.setInt(7, user.getUSER_ROLE());
+			stmt.setString(8, user.getUSER_ID());
 			
 			int result = stmt.executeUpdate();
 

@@ -38,7 +38,12 @@
 					</div>	
 					</c:if>
 				<div class="form_controllers">
+					<a href="Home" class="button back">Trở về</a>
 					<button class="button">Đăng nhập</button>
+				</div>
+				
+				<div class="sub_link">
+					Chưa có tài khoản ? <a href="Register.jsp">Đăng ký ngay</a>
 				</div>
 		</form>
 		</div>

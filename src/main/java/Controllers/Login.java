@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import DAO.User;
 import DAO.UserDAO;
+import Interface.AccountChecker;
 import Interface.EncryptPass;
 
 /**
@@ -33,8 +34,11 @@ public class Login extends HttpServlet implements EncryptPass {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		if(AccountChecker.isLogin(request)) {
+			response.sendRedirect("Home");
+		} else {
+			response.sendRedirect("Login.jsp");
+		}
 	}
 
 	/**
@@ -54,12 +58,13 @@ public class Login extends HttpServlet implements EncryptPass {
 			User = DAO.Login(USER_NAME, EncryptPass.md5(USER_PASSWORD));	
 			
 			if(User == null) {
-				request.setAttribute("MESSAGE", "Đăng nhập thất bại");
+				request.setAttribute("MESSAGE", "Sai tên tài khoản hoặc mật khẩu");
 				request.getRequestDispatcher("Login.jsp").forward(request, response);
 			} else {
 				if(User.getIS_DISABLED() != 1) {
 					HttpSession session = request.getSession();
 					session.setAttribute("account", User);
+					session.setAttribute("profileChecker", AccountChecker.profileChecker(request));
 					
 					response.sendRedirect("Home");				
 				} else {

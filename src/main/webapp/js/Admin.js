@@ -8,6 +8,7 @@ const imagePreviewElement = document.querySelector(".image_preview_side .image_h
 const searchParams = new URLSearchParams(window.location.search);
 const deleteProductButtons = document.querySelectorAll("#admin_shop .button.delete");
 const selectStatusElement = document.querySelector("select[name='INVOICE_STATUS']")
+const AddingPopup = document.querySelector(".adding_popup");
 
 window.onload = () => {
 	if(selectStatusElement) {
@@ -74,6 +75,38 @@ const handleCancelUser = (USER_ID) => {
 	form.submit();
 }
 
+const handleDeleteCategory = (CATEGORY_ID) => {
+	var form = document.querySelector("#category_form")
+	form.action = `AdminCategory?action=delete&CATEGORY_ID=${ CATEGORY_ID }`;
+	form.method = "POST";
+	
+	form.submit();
+}
+
+const handleCancelCategory = (CATEGORY_ID) => {
+	var form = document.querySelector("#category_form")
+	form.action = `AdminCategory?action=cancel&CATEGORY_ID=${ CATEGORY_ID }`;
+	form.method = "POST";
+	
+	form.submit();
+}
+
+const handleDeleteCountry = (COUNTRY_ID) => {
+	var form = document.querySelector("#country_form")
+	form.action = `AdminCountry?action=delete&COUNTRY_ID=${ COUNTRY_ID }`;
+	form.method = "POST";
+	
+	form.submit();
+}
+
+const handleCancelCountry = (COUNTRY_ID) => {
+	var form = document.querySelector("#country_form")
+	form.action = `AdminCountry?action=cancel&COUNTRY_ID=${ COUNTRY_ID }`;
+	form.method = "POST";
+	
+	form.submit();
+}
+
 function insertParam(key, value) {			
 		    key = encodeURIComponent(key);
 		    value = encodeURIComponent(value);
@@ -102,4 +135,12 @@ function insertParam(key, value) {
 
 		    // reload page with new params
 		    document.location.search = params;
-		}
+}
+
+const openAddingPopup = () => {
+	AddingPopup.classList.add("show");
+}
+
+const closeAddingPopup = () => {
+	AddingPopup.classList.remove("show");
+}

@@ -41,7 +41,6 @@
 							<th>Số điện thoại</th>
 							<th>Địa chỉ</th>
 							<th>Vai trò</th>
-							<th>Trạng thái</th>
 							<th>Hành động</th>
 						</tr>
 					</thead>
@@ -55,7 +54,6 @@
 								<td><c:out value="${ USER.getUSER_PHONE_NUMBER() }"></c:out></td>
 								<td><c:out value="${ USER.getUSER_ADDRESS() }"></c:out></td>
 								<td><c:out value="${ USER.getUSER_ROLE() }"></c:out></td>
-								<td><c:out value="${ USER.getIS_DISABLED() }"></c:out></td>
 								<td>
 									<div class="column_controllers">
 										<a onClick="handleCancelUser(${USER.getUSER_ID()})" class="button edit">Huỷ</a>

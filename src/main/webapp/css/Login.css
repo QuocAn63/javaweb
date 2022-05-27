@@ -57,6 +57,10 @@
 
 .login_container #login_form .form_controllers {
 	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
 }
 
 .login_container #login_form .form_controllers .button {
@@ -65,8 +69,21 @@
 	color: #fff;
 	border-radius: 3px;
 	border: 0;
-	padding: 10px 20px;
+	padding: 0 20px;
+	font-size: 1.3rem;
 	font-weight: bold;
+	min-height: 38px;
+}
+
+.login_container #login_form .form_controllers .button.back {
+	background-color: transparent;
+	color: var(--text-colo);
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	font-size: 1.3rem;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .error_show {
@@ -81,3 +98,12 @@
 	font-size: 1.6rem;
 }
 
+.login_container .sub_link {
+	margin-top: 20px;
+	text-align: center;
+	font-size: 1.3rem;
+}
+
+.login_container .sub_link a {
+	color: var(--button-color);
+}

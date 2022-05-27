@@ -17,13 +17,14 @@ import org.apache.tomcat.util.security.MD5Encoder;
 
 import DAO.User;
 import DAO.UserDAO;
+import Interface.AccountChecker;
 import Interface.EncryptPass;
 
 /**
  * Servlet implementation class Register
  */
 @WebServlet("/Register")
-public class Register extends HttpServlet implements EncryptPass {
+public class Register extends HttpServlet implements EncryptPass, AccountChecker {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -38,8 +39,11 @@ public class Register extends HttpServlet implements EncryptPass {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		if(AccountChecker.isLogin(request)) {
+			response.sendRedirect("Home");
+		} else {
+			response.sendRedirect("Register.jsp");
+		}
 	}
 
 	/**
@@ -62,7 +66,7 @@ public class Register extends HttpServlet implements EncryptPass {
 				
 		if(!USER_PASSWORD.equals(USER_RE_PASSWORD)) {
 			request.setAttribute("MESSAGE", "MẬT KHẨU NHẬP LẠI KHÔNG CHÍNH XÁC");
-			request.getRequestDispatcher("Register.jsp").forward(request, response);
+			request.getRequestDispatcher("Register").forward(request, response);
 		} else {
 			UserDAO DAO = new UserDAO();
 			User isAccountExist = DAO.Find(USER_NAME);
@@ -71,7 +75,7 @@ public class Register extends HttpServlet implements EncryptPass {
 				try {
 					boolean result = DAO.Save(new User(USER_NAME, EncryptPass.md5(USER_PASSWORD), USER_EMAIL, USER_PHONE_NUMBER, USER_FULL_NAME));
 					if(result) {
-						response.sendRedirect("Home");
+						response.sendRedirect("Login");
 					} else {
 						request.setAttribute("MESSAGE", "Đăng ký không thành công");
 						request.getRequestDispatcher("Register.jsp").forward(request, response);

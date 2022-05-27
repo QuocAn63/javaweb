@@ -9,6 +9,17 @@ public class Category {
 		super();
 	}
 	
+	public Category(String cATEGORY_ID) {
+		super();
+		CATEGORY_ID = cATEGORY_ID;
+	}
+
+	public Category(String cATEGORY_ID, String cATEGORY_NAME) {
+		super();
+		CATEGORY_ID = cATEGORY_ID;
+		CATEGORY_NAME = cATEGORY_NAME;
+	}
+
 	public Category(String cATEGORY_ID, String cATEGORY_NAME, int iS_DISABLED) {
 		super();
 		CATEGORY_ID = cATEGORY_ID;

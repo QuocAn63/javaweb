@@ -27,15 +27,16 @@
 	<div id="admin_content_container">
 		<div id="admin_shop">
 			<div class="admin_shop_controller">
-				<div class="button">Thêm danh mục</div>
+				<a href="AdminCategory?action=insert" class="button">Thêm danh mục</a>
+				<a href="AdminCategory?action=delete" class="button delete">Danh mục đã xoá <c:if test="${ DELETED_LENGTH != 0 }">(${ DELETED_LENGTH })</c:if></a>
 			</div>
 			<div class="admin_shop_main">
+				<form id="category_form"></form>
 				<table id="admin_shop_table">
 					<thead>
 						<tr>
 							<th>ID</th>
 							<th>Tên danh mục</th>
-							<th>Tình trạng</th>
 							<th>Hành động</th>
 						</tr>
 					</thead>
@@ -44,11 +45,10 @@
 							<tr>
 								<td><c:out value="${ CATEGORY.getCATEGORY_ID() }"></c:out></td>
 								<td><c:out value="${ CATEGORY.getCATEGORY_NAME() }"></c:out></td>
-								<td><c:out value="${ CATEGORY.getIS_DISABLED() }"></c:out></td>
 								<td>
 									<div class="column_controllers">
-										<div class="button edit">Sửa</div>
-										<div class="button delete">Xoá</div>
+										<a href="AdminCategory?action=edit&CATEGORY_ID=${ CATEGORY.getCATEGORY_ID() }" class="button edit">Sửa</a>
+										<div class="button delete" onClick="handleDeleteCategory('${ CATEGORY.getCATEGORY_ID() }')">Xoá</div>
 									</div>
 								</td>
 							</tr>
@@ -59,5 +59,6 @@
 		</div>
 	</div>
 
+	<jsp:include page="./AddCategoryPopup.jsp" ></jsp:include >
 </body>
 </html>

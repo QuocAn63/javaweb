@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,7 @@
 														<div class="quantity">x<c:out value="${ product.getQUANTITY() }"></c:out> </div>
 													</div>
 													<div class="price">
-														<c:out value="${ product.getTotal() }"></c:out>
+														<fmt:formatNumber value="${ product.getTotal() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/>
 													</div>
 												</div>
 											</c:forEach>
@@ -80,7 +81,7 @@
 										</div>
 										<div class="invoice_grand_total">
 											<div class="label">Tổng hoá đơn: </div>
-											<div class="content"><c:out value="${ invoice.getINVOICE_GRAND_TOTAL() }"></c:out></div>
+											<div class="content"><fmt:formatNumber value="${ invoice.getINVOICE_GRAND_TOTAL() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></div>
 										</div>
 									</div>
 								</div>

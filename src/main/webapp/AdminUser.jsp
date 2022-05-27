@@ -42,7 +42,6 @@
 							<th>Số điện thoại</th>
 							<th>Địa chỉ</th>
 							<th>Vai trò</th>
-							<th>Trạng thái</th>
 							<th>Hành động</th>
 						</tr>
 					</thead>
@@ -55,8 +54,13 @@
 								<td><c:out value="${ USER.getUSER_EMAIL() }"></c:out></td>
 								<td><c:out value="${ USER.getUSER_PHONE_NUMBER() }"></c:out></td>
 								<td><c:out value="${ USER.getUSER_ADDRESS() }"></c:out></td>
-								<td><c:out value="${ USER.getUSER_ROLE() }"></c:out></td>
-								<td><c:out value="${ USER.getIS_DISABLED() }"></c:out></td>
+								<td>
+									<c:choose>
+										<c:when test="${ USER.getUSER_ROLE() == 0 }">Khách hàng</c:when>
+										<c:when test="${ USER.getUSER_ROLE() == 1 }">Quản trị viên</c:when>
+										<c:otherwise>Không xác định</c:otherwise>
+									</c:choose>
+								</td>
 								<td>
 									<div class="column_controllers">
 										<a href="AdminUser?action=update&USER_NAME=${USER.getUSER_NAME() }" class="button edit">Sửa</a>

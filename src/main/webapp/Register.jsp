@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,7 +56,19 @@
 					</div>
 				</div>
 				<div class="form_controllers">
+					<a href="Home" class="button back">Trở lại</a>
 					<button class="button">Đăng ký</button>
+				</div>
+				
+				<c:if test="${ MESSAGE != null }">
+		
+					<div class="error_show">
+						<p>${MESSAGE}</p>
+					</div>	
+				</c:if>
+				
+				<div class="sub_link">
+					Đã có tài khoản ? <a href="Login.jsp">Đăng nhập</a>
 				</div>
 		</form>
 		</div>

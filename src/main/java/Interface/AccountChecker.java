@@ -19,5 +19,13 @@ public interface AccountChecker {
 		
 		return cartObject == null;
 	}
+	
+	public static boolean profileChecker(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Object userObject = session.getAttribute("account");
+		DAO.User User = (DAO.User) userObject;
+		
+		return (User.getUSER_FULL_NAME() != null && User.getUSER_ADDRESS() != null);
+	}
 }
 

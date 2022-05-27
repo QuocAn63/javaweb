@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,14 +69,14 @@
 												<c:forEach items="${ INVOICE.getList() }" var="INVOICE_ITEM">
 													<tr>
 														<td style="text-align: left">${ INVOICE_ITEM.PRODUCT.getPRODUCT_NAME() }</td>
-														<td>${ INVOICE_ITEM.PRODUCT.getPRODUCT_PRICE() }</td>
+														<td><fmt:formatNumber value="${ INVOICE_ITEM.PRODUCT.getPRODUCT_PRICE() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></td>
 														<td>${ INVOICE_ITEM.getQUANTITY() }</td>
-														<td>${ INVOICE_ITEM.getTotal() }</td>
+														<td><fmt:formatNumber value="${ INVOICE_ITEM.getTotal() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></td>
 													</tr>	
 												</c:forEach>
 												<tr class="invoice_detail_grand_total">
 													<td colspan="3" style="text-align: right">Tổng hoá đơn</td>
-													<td style="color: var(--button-color)">${ INVOICE.getINVOICE_GRAND_TOTAL() }</td>
+													<td style="color: var(--button-color)"><fmt:formatNumber value="${ INVOICE.getINVOICE_GRAND_TOTAL() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></td>
 												</tr>
 											</tbody>
 										</table>

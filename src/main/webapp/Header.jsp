@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="header">
 	<div class="navigation">
 		<div class="navigation_container">
@@ -42,7 +43,7 @@
 							<c:if test="${ sessionScope.account != null }">
 								<span class="user_controller_item user_name" style="margin-right: 6px">${ sessionScope.account.USER_FULL_NAME }</span>
 							</c:if>
-							<i class="fa-solid fa-gear"></i>
+							<i class="fa-solid fa-gear"><c:if test="${ sessionScope.profileChecker == false }"><span class="user_attention"></span></c:if></i>
 						</div>
 						<div class="user_controller_container dropdown">
 							<c:if test="${ sessionScope.account != null }">
@@ -51,8 +52,9 @@
 										Quản lý sản phẩm
 									</div>
 								</c:if>
-								<a href="GoToUser?site=profile" class="user_controller_item">
+								<a href="GoToUser?site=profile" class="user_controller_item" style="position: relative">
 									Thông tin tài khoản
+									<c:if test="${ sessionScope.profileChecker == false }"><span class="user_attention" style="top: 7px; right: 4px;"></span></c:if>
 								</a>
 								<a href="GoToUser?site=invoices" class="user_controller_item">
 									Đơn hàng
@@ -62,10 +64,10 @@
 								</a>
 							</c:if>
 							<c:if test="${ sessionScope.account == null }">
-								<a href="<%= request.getContextPath() %>/Login.jsp" class="user_controller_item user_controller_item_link">
+								<a href="Login" class="user_controller_item user_controller_item_link">
 									Đăng nhập
 								</a>
-								<a href="<%= request.getContextPath() %>/Register.jsp" class="user_controller_item user_controller_item_link">
+								<a href="Register" class="user_controller_item user_controller_item_link">
 									Đăng ký
 								</a>
 							</c:if>
@@ -86,7 +88,7 @@
 										<div class="information">
 											<div class="name">${ item.PRODUCT.getPRODUCT_NAME() }</div>
 											<div class="quantity">x${ item.getQUANTITY() }</div>
-											<div class="price">${ item.PRODUCT.getPRODUCT_PRICE() }</div>	
+											<div class="price"><fmt:formatNumber value="${ item.PRODUCT.getPRODUCT_PRICE() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></div>	
 										</div>
 										<div class="controller">
 											<button type="button" onClick="removeFromCart(${ item.PRODUCT.getPRODUCT_ID() })">&times;</button>
@@ -98,7 +100,7 @@
 								<div class="cart_info">
 									<div class="item">
 										<div class="title">Tổng giá:</div>
-										<div class="value"><c:out value="${ sessionScope.cart.getTotal() }"></c:out></div>
+										<div class="value"><fmt:formatNumber value="${ sessionScope.cart.getTotal() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></div>
 									</div>
 									<div class="item">
 										<div class="title">Phí vận chuyển:</div>
@@ -106,7 +108,7 @@
 									</div>
 									<div class="item">
 										<div class="title">Thành tiền:</div>
-										<div class="value"><c:out value="${ sessionScope.cart.getTotal() }"></c:out></div>
+										<div class="value"><fmt:formatNumber value="${ sessionScope.cart.getTotal() }" type="currency" currencySymbol="đ " maxFractionDigits="0"/></div>
 									</div>
 								</div>
 								<div class="cart_controllers">

@@ -20,23 +20,22 @@
 <script type="text/javascript" src="./js/Admin.js" defer></script>
 </head>
 <body>
-	<%@include file="./AdminHeader.jsp" %>
+	<%@include file="../AdminHeader.jsp" %>
 
-	<%@include file="./AdminSidebar.jsp" %>
+	<%@include file="../AdminSidebar.jsp" %>
 	
 	<div id="admin_content_container">
 		<div id="admin_shop">
 			<div class="admin_shop_controller">
-				<a href="AdminCountry?action=insert" class="button">Thêm xuất xứ</a>
-				<a href="AdminCountry?action=delete" class="button delete">Quốc gia đã xoá <c:if test="${ DELETED_LENGTH != 0 }">(${ DELETED_LENGTH })</c:if></a>
+				<a href="Admin?site=country" class="button">Tất cả quốc gia</a>
 			</div>
 			<div class="admin_shop_main">
-				<form id="country_form"></form>
+				<form id="country_form" style="display: none"></form>
 				<table id="admin_shop_table">
 					<thead>
 						<tr>
 							<th>ID</th>
-							<th>Tên xuất xứ</th>
+							<th>Tên quốc gia</th>
 							<th>Hành động</th>
 						</tr>
 					</thead>
@@ -47,8 +46,7 @@
 								<td><c:out value="${ COUNTRY.getCOUNTRY_NAME() }"></c:out></td>
 								<td>
 									<div class="column_controllers">
-										<a href="AdminCountry?action=edit&COUNTRY_ID=${ COUNTRY.getCOUNTRY_ID() }" class="button edit">Sửa</a>
-										<div class="button delete" onClick="handleDeleteCountry('${ COUNTRY.getCOUNTRY_ID() }')">Xoá</div>
+										<a onClick="handleCancelCountry('${COUNTRY.getCOUNTRY_ID()}')" class="button edit">Huỷ</a>
 									</div>
 								</td>
 							</tr>
@@ -59,6 +57,5 @@
 		</div>
 	</div>
 
-	<jsp:include page="./AddCountryPopup.jsp" ></jsp:include >
 </body>
 </html>

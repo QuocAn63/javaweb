@@ -68,5 +68,131 @@ public class CountryDAO extends HttpServlet {
 		}
 		return null;
 	}
+	
+	public ArrayList<Country> getAll(int value) {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM COUNTRY WHERE IS_DISABLED = ?");
+			stmt.setInt(1, value);
+			ResultSet result = stmt.executeQuery();
+			ArrayList<Country> list = new ArrayList<Country>();
+			
+			while(result.next()) {
+				Country country = new Country();
+				country.setCOUNTRY_ID(result.getString("COUNTRY_ID"));
+				country.setCOUNTRY_NAME(result.getString("COUNTRY_NAME"));
+				country.setIS_DISABLED(result.getInt("IS_DISABLED"));
+				list.add(country);
+			}
+			
+			stmt.close();
+			conn.close();
+			
+			return list;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Country GetCountry(String COUNTRY_ID) {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM COUNTRY WHERE COUNTRY_ID = ? ");
+			stmt.setString(1, COUNTRY_ID);
+			ResultSet result = stmt.executeQuery();
+			
+			while(result.next()) {
+				return new Country(result.getString("COUNTRY_ID"), result.getString("COUNTRY_NAME"));
+			}
+			
+			stmt.close();
+			conn.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
+	public boolean InsertCountry(Country Country) {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("INSERT INTO COUNTRY(COUNTRY_ID, COUNTRY_NAME) VALUES (?, ?)");
+			stmt.setString(1, Country.getCOUNTRY_ID());
+			stmt.setString(2, Country.getCOUNTRY_NAME());
+			
+			int result = stmt.executeUpdate();
+			
+			return result != 0;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean UpdateCountry(Country Country) {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("UPDATE COUNTRY SET COUNTRY_NAME = ? WHERE COUNTRY_ID = ?");
+			stmt.setString(1, Country.getCOUNTRY_NAME());
+			stmt.setString(2, Country.getCOUNTRY_ID());
+			
+			int result = stmt.executeUpdate();
+			
+			return result != 0;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean DeleteCountry(Country Country) {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("UPDATE COUNTRY SET IS_DISABLED = 1 WHERE COUNTRY_ID = ?");
+			stmt.setString(1, Country.getCOUNTRY_ID());
+			
+			int result = stmt.executeUpdate();
+			
+			return result != 0;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean CancelDeleteCountry(Country Country) {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("UPDATE COUNTRY SET IS_DISABLED = 0 WHERE COUNTRY_ID = ?");
+			stmt.setString(1, Country.getCOUNTRY_ID());
+			
+			int result = stmt.executeUpdate();
+			
+			return result != 0;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public int getCountriesLength(int value) {
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(COUNTRY_ID) AS LENGTH FROM COUNTRY WHERE IS_DISABLED = ?");
+			stmt.setInt(1, value);
+			ResultSet result = stmt.executeQuery();
+			
+			while(result.next()) {
+				return result.getInt("LENGTH");
+			}
+			
+			stmt.close();
+			conn.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import DAO.User;
 import DAO.UserDAO;
+import Interface.AccountChecker;
 
 /**
  * Servlet implementation class UpdateUser
@@ -71,6 +72,8 @@ public class UpdateUser extends HttpServlet {
 		
 		if(DAO.Update(User)) {
 			session.setAttribute("account", User);
+			session.setAttribute("profileChecker", AccountChecker.profileChecker(request));
+			
 			response.sendRedirect("GoToUser?site=profile");
 		} else {
 			response.sendRedirect("GoToUser?site=profile");

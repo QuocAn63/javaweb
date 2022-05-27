@@ -73,16 +73,6 @@
 									</div>
 								</div>
 							</div>
-							<div class="menu_item">
-								<div class="title">Theo quốc gia</div>
-								<div class="menu_list">
-									<c:forEach items="${countries}" var="item">
-										<div class="checkbox_wrapper">
-											<input type="checkbox" class="list_item">${item.COUNTRY_NAME}</input>									
-										</div>
-									</c:forEach>
-								</div>
-							</div>
 						</div>
 					</div>
 					<div class="col c-9">
@@ -99,13 +89,14 @@
 								<c:forEach items="${products}" var="item">
 									<div class="col c-3">
 											<div class="product">
-												<a href="<%= request.getContextPath() %>/Product?PRODUCT_ID=${item.PRODUCT_ID}">
+												<a href="<%= request.getContextPath() %>/Product?PRODUCT_ID=${item.getPRODUCT_ID()}">
 													<div class="image" style="background-image: url(${ item.getPRODUCT_IMAGE()})"></div>
 													<div class="informations">
-														<div class="title">${item.PRODUCT_NAME}</div>
-														<div class="price">${item.PRODUCT_PRICE}</div>
+														<div class="title">${item.getPRODUCT_NAME()}</div>
+														<div class="price"><fmt:formatNumber value="${item.getPRODUCT_PRICE()}" type="currency" currencySymbol="đ " maxFractionDigits="0"/></div>
 													</div>
 												</a>
+												<div onClick="addToCart(${item.getPRODUCT_ID()})"class="button add_cart_button">Thêm vào giỏ</div>
 											</div>
 										</div>
 								</c:forEach>

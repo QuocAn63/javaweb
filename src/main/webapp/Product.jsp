@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,11 +51,11 @@
 											<div class="value"><c:out value="${PRODUCT.COUNTRY_NAME}"/></div>
 										</div>
 									</div>
-									<div class="product_price"><c:out value="${PRODUCT.PRODUCT_PRICE}"/></div>
+									<div class="product_price"><fmt:formatNumber value="${PRODUCT.PRODUCT_PRICE}" type="currency" currencySymbol="đ " maxFractionDigits="0"/></div>
 								</div>
 								<div class="product_detail_body">
 									<div class="product_description">
-										Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
+										${ PRODUCT.getPRODUCT_DESCRIPTION() }
 									</div>
 									<div class="product_controller">
 										<button class="button add_to_cart_button" onClick="addToCart(${PRODUCT.PRODUCT_ID})">Thêm vào giỏ hàng</button>

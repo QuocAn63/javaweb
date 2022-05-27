@@ -113,17 +113,21 @@ public class Admin extends HttpServlet implements AccountChecker {
 	
 	private void AdminCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CategoryDAO DAO = new CategoryDAO();
-		ArrayList<Category> list = DAO.getAll();
+		ArrayList<Category> list = DAO.getAll(0);
+		int DeletedLength = DAO.getCategoriesLength(1);
 		
 		request.setAttribute("CATEGORIES", list);
+		request.setAttribute("DELETED_LENGTH", DeletedLength);
 		request.getRequestDispatcher("AdminCategory.jsp").forward(request, response);
 	}
 	
 	private void AdminCountry(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CountryDAO DAO = new CountryDAO();
-		ArrayList<Country> list = DAO.getAll();
+		ArrayList<Country> list = DAO.getAll(0);
+		int DeletedLength = DAO.getCountriesLength(1);
 		
 		request.setAttribute("COUNTRIES", list);
+		request.setAttribute("DELETED_LENGTH", DeletedLength);
 		request.getRequestDispatcher("AdminCountry.jsp").forward(request, response);
 	}
 

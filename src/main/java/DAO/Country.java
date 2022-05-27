@@ -9,6 +9,17 @@ public class Country {
 		super();
 	}
 	
+	public Country(String cOUNTRY_ID) {
+		super();
+		COUNTRY_ID = cOUNTRY_ID;
+	}
+
+	public Country(String cOUNTRY_ID, String cOUNTRY_NAME) {
+		super();
+		COUNTRY_ID = cOUNTRY_ID;
+		COUNTRY_NAME = cOUNTRY_NAME;
+	}
+
 	public Country(String COUNTRY_ID, String COUNTRY_NAME, int iS_DISABLED) {
 		super();
 		this.COUNTRY_ID = COUNTRY_ID;

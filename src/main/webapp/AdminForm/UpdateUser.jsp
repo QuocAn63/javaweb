@@ -60,8 +60,8 @@
 												<div class="label">Giới tính</div>
 												<div class="select-wrapper">
 													<select name="USER_GENDER" value="${ USER.getUSER_GENDER() }">
-														<option value="0">Nam</option>
-														<option value="1">Nữ</option>
+														<option value="0" <c:if test="${ USER.getUSER_GENDER() == 0 }">selected</c:if>>Nam</option>
+														<option value="1" <c:if test="${ USER.getUSER_GENDER() == 1 }">selected</c:if>>Nữ</option>
 													</select>
 												</div>
 											</div>
@@ -76,7 +76,7 @@
 												<div class="select-wrapper">
 													<select name="USER_ROLE">
 														<c:forEach items="${ ROLES }" var="ROLE">
-															<option value="${ROLE.getROLE_ID() }">${ROLE.getROLE_NAME()}</option>
+															<option value="${ROLE.getROLE_ID() }" <c:if test="${ USER.getUSER_ROLE() == ROLE.getROLE_ID() }">selected</c:if> >${ROLE.getROLE_NAME()}</option>
 														</c:forEach>
 													</select>
 												</div>
@@ -86,6 +86,7 @@
 								</div>
 								<div class="col c-12">
 									<div class="form_controller">
+										<a href="Admin?site=user" class="button back">Trở về</a>
 										<button class="button">Sửa</button>
 									</div>
 								</div>
