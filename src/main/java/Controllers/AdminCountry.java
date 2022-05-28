@@ -147,7 +147,7 @@ public class AdminCountry extends HttpServlet implements AccountChecker {
 		DAO.Country Country = new DAO.Country(COUNTRY_ID);
 	
 		if(DAO.DeleteCountry(Country)) {
-			response.sendRedirect("Admin?site=category");
+			response.sendRedirect("Admin?site=country");
 		}
 	}
 

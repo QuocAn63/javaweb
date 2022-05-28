@@ -77,7 +77,7 @@ public class ShopProducts extends HttpServlet {
 		CountryDAO conDAO = new CountryDAO();
 		
 		ArrayList<Product> list = proDAO.getAll(Filters);
-		ArrayList<Category> catList = catDAO.getAll();
+		ArrayList<Category> catList = catDAO.getAll(0);
 		ArrayList<Country> conList = conDAO.getAll();
 		int TotalPage = proDAO.getTotalPage(Filters);
 				

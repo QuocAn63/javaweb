@@ -189,26 +189,31 @@ public class AdminProduct extends HttpServlet implements AccountChecker{
 			String COUNTRY = request.getParameter("COUNTRY");
 			String SEASON = request.getParameter("SEASON");
 			String PRODUCT_DESCRIPTION = request.getParameter("PRODUCT_DESCRIPTION");
+			
 			Part part = request.getPart("PRODUCT_IMAGE");
-			
-			String realPath = request.getServletContext().getRealPath("/uploads");
-			String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
-			
-			if(!Files.exists(Path.of(realPath))) {
-				Files.createDirectories(Path.of(realPath));
+			String filename = null;
+			if(!part.getSubmittedFileName().isEmpty()) {
+				String realPath = request.getServletContext().getRealPath("/uploads");
+				filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
+				
+				if(!Files.exists(Path.of(realPath))) {
+					Files.createDirectories(Path.of(realPath));
+				}
+				
+				part.write(realPath + "/" + filename);
 			}
 			
-			part.write(realPath + "/" + filename);
-			
 			ProductDAO DAO = new ProductDAO();
-			DAO.Product Product = new DAO.Product();
+			DAO.Product Product = DAO.getProduct(PRODUCT_ID);
 			Product.setPRODUCT_ID(PRODUCT_ID);
 			Product.setCATEGORY(CATEGORY);
 			Product.setCOUNTRY(COUNTRY);
 			Product.setPRODUCT_DESCRIPTION(PRODUCT_DESCRIPTION);
 			Product.setPRODUCT_NAME(PRODUCT_NAME);
 			Product.setPRODUCT_PRICE(PRODUCT_PRICE);
-			Product.setPRODUCT_IMAGE("uploads/" + filename);
+			if(filename != null) {
+				Product.setPRODUCT_IMAGE("uploads/" + filename);
+			}
 			Product.setSEASON(SEASON);
 			
 			DAO.Update(Product);

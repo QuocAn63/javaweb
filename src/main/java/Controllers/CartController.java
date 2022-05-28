@@ -99,7 +99,11 @@ public class CartController extends HttpServlet implements AccountChecker {
 			newUserCart = (UserCart) CartObject;
 		}
 		
-		newUserCart.AddToCart(PRODUCT_ID);
+		if(newUserCart.isExisting(PRODUCT_ID)) {
+			newUserCart.extraProduct(PRODUCT_ID);
+		} else {
+			newUserCart.AddToCart(PRODUCT_ID);
+		}
 		session.setAttribute("cart", newUserCart);
 	}
 

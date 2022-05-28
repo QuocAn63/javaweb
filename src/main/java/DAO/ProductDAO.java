@@ -207,8 +207,7 @@ public class ProductDAO extends HttpServlet {
 		
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PRODUCT " + subQuery);
-			System.out.println("SELECT * FROM PRODUCT JOIN CATEGORY ON PRODUCT.CATEGORY = CATEGORY.CATEGORY_ID JOIN COUNTRY ON PRODUCT.COUNTRY = COUNTRY.COUNTRY_ID " + subQuery);
+			PreparedStatement stmt = conn.prepareStatement("SELECT * FROM PRODUCT JOIN CATEGORY ON PRODUCT.CATEGORY = CATEGORY.CATEGORY_ID JOIN COUNTRY ON PRODUCT.COUNTRY = COUNTRY.COUNTRY_ID " + subQuery);
 			ResultSet result = stmt.executeQuery();
 			ArrayList<Product> list = new ArrayList<Product>();
 			
@@ -258,7 +257,7 @@ public class ProductDAO extends HttpServlet {
 		String countQuery = Filters.getQuery();
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement countStmt = conn.prepareStatement("SELECT COUNT(PRODUCT_ID) AS TOTAL FROM PRODUCT " + countQuery);
+			PreparedStatement countStmt = conn.prepareStatement("SELECT COUNT(PRODUCT_ID) AS TOTAL FROM PRODUCT JOIN CATEGORY ON PRODUCT.CATEGORY = CATEGORY.CATEGORY_ID JOIN COUNTRY ON PRODUCT.COUNTRY = COUNTRY.COUNTRY_ID " + countQuery);
 			ResultSet result = countStmt.executeQuery();
 			while(result.next()) {
 				int Total = (int) Math.ceil(Integer.parseInt(result.getString("TOTAL"))*1.0/Filters.getLIMIT());

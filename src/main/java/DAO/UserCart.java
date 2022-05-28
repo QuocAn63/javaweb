@@ -33,12 +33,20 @@ public class UserCart {
 	
 	public boolean isExisting(String PRODUCT_ID) {		
 		for(CartItem cartItem : list) {
-			if(cartItem.PRODUCT.getPRODUCT_ID() == PRODUCT_ID) {
+			if(cartItem.PRODUCT.getPRODUCT_ID().equals(PRODUCT_ID)) {
 				return true;
 			}
 		}
 		
 		return false;
+	}
+	
+	public void extraProduct(String PRODUCT_ID) {
+		for(CartItem cartItem : list) {
+			if(cartItem.PRODUCT.getPRODUCT_ID().equals(PRODUCT_ID)) {
+				cartItem.QUANTITY += 1;
+			}
+		}
 	}
 	
 	public boolean RemoveFromCart(String pRODUCT_ID) {
